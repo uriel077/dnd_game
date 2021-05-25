@@ -1,4 +1,5 @@
 package unit;
 
-public class Unit {
+public abstract class Unit {
+
 }
