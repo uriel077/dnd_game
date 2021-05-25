@@ -4,12 +4,13 @@ package game;
 import unit.enemy.Enemy;
 import unit.player.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DatabaseUnits {
-   List<Player> playerPool=new ArrayList<Player>();
-   List<Enemy> enemyPool=new ArrayList<Enemy>();
+
+
+   Map<String, Player > playerPool= new HashMap<String, Player>();
+   Map<String, Enemy > enemyPool= new HashMap<String, Enemy>();
 
 
 }
