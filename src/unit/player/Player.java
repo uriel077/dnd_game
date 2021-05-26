@@ -12,7 +12,7 @@ public class Player extends Unit {
     public String abilityName="";
     public int abilityRange=0;
     public Player(String name, char tile, int health, int attack, int defence) {
-
+        //super( name, tile,  health, attack, defence);
     }
 
     @Override
