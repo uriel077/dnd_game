@@ -1,4 +1,8 @@
 package unit.player;
 
-public class Player {
+import unit.Unit;
+
+public class Player extends Unit {
+
+
 }
