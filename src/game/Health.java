@@ -12,6 +12,6 @@ public class Health {
         this.healthPool=healthPool;
     }
     public boolean isDead() {
-       return healthPool<=0;
+       return healthAmount<=0;
     }
 }
