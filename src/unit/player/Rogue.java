@@ -3,7 +3,7 @@ package unit.player;
 import handlers.TargetHandler;
 import unit.Unit;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rogue extends Player{
@@ -20,7 +20,8 @@ public class Rogue extends Player{
     @Override
     public List<String> castAbility(){
         List<Unit> potenTarget= TargetHandler.candidateTarget(this,this.cordinate,this.abilityRange);
-        List<String> message=Arrays.asList(new String[]{this.name+" cast "+this.abilityName});
+        List<String> message=new ArrayList<String>();
+       message.add(this.name+" cast "+this.abilityName);
         for(Unit target:potenTarget){
        //     message.add(this.attack(target));
         }

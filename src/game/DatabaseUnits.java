@@ -33,7 +33,7 @@ public class DatabaseUnits {
       buildUnit(dirAddons+"/dbEnemy",enemyPool);
 
    }
-   private String getFile(String address)  {
+   public static String getFile(String address)  {
       String fileText="";
       try {
          Path fileName = Path.of(address);

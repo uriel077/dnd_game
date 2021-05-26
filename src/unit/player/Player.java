@@ -1,5 +1,6 @@
 package unit.player;
 
+import enums.UserInput;
 import unit.Unit;
 
 import java.util.Arrays;
@@ -15,10 +16,10 @@ public class Player extends Unit {
         //super( name, tile,  health, attack, defence);
     }
 
-    @Override
-    public String toString() {
-        return super.toString()+"\tLevel: "+playerLevel+"\tExperience:"+getExperience()+"/"+getExperience()*playerLevel;
-    }
+//    @Override
+//    public String description() {
+//        return super.description()+"\tLevel: "+playerLevel+"\tExperience:"+getExperience()+"/"+getExperience()*playerLevel;
+//    }
 
     public int getExperience() {
         return experience;
@@ -41,7 +42,16 @@ public class Player extends Unit {
         if(resource-cost>=0)
             return castAbility();
         else
-            return Arrays.asList(new String[]{""});
+            return Arrays.asList(new String[]{this.name+" tried to cast "+this.abilityName+", but there was not enough energy: "+resource+"/"+cost});
+    }
+    public List<String> turn(int turnCount){
+        UserInput input=UserInput.Wait;
+        //input=InputHandler.getInput
+        if(input==UserInput.CastAbility)
+           return this.castAbility();
+       // else
+            //return MoveHandler(this,input);
+        return null;
     }
     public  List<String> castAbility(){
         return null;
