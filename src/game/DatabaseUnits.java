@@ -21,14 +21,14 @@ import java.util.Map;
 public class DatabaseUnits {
 
 
-   public Map<String, Unit > playerPool= new HashMap<String, Unit>();
-   public Map<String, Unit > enemyPool= new HashMap<String, Unit>();
-   private final String dirAddons="src/addons";
+   public static Map<String, Unit > playerPool= new HashMap<String, Unit>();
+   public static Map<String, Unit > enemyPool= new HashMap<String, Unit>();
+   private final static String dirAddons="src/addons";
 
    public DatabaseUnits(){
       buildDictionary();
    }
-   private void buildDictionary(){
+   public static void buildDictionary(){
       buildUnit(dirAddons+"/dbPlayer",playerPool);
       buildUnit(dirAddons+"/dbEnemy",enemyPool);
 
@@ -42,7 +42,7 @@ public class DatabaseUnits {
       catch (IOException e){}
       return fileText;
    }
-   private void buildUnit(String address,Map<String, Unit > map){
+   private static void buildUnit(String address,Map<String, Unit > map){
    String txtToSplit=getFile(address);
    ArrayList<String> enemyUnit=  new ArrayList<String>(Arrays.asList(txtToSplit.split("\r\n")));
       for (String unitStr:enemyUnit) {
@@ -53,51 +53,40 @@ public class DatabaseUnits {
 
    }
 
-   private Unit facrotyUnit( ArrayList<String> typeUnit){
+   private static Unit facrotyUnit( ArrayList<String> typeUnit){
       String type=typeUnit.get(0);
       String name=typeUnit.get(1);
-      char tile;
-      int health,attack,defence;
+      char tile=typeUnit.get(2).charAt(0);
+      int health=Integer.parseInt(typeUnit.get(3));
+      int attack=Integer.parseInt(typeUnit.get(4));
+      int defence=Integer.parseInt(typeUnit.get(5));
       if(type.equals("Monster")){
-         tile=typeUnit.get(2).charAt(0);
-         health=Integer.parseInt(typeUnit.get(3));
-         attack=Integer.parseInt(typeUnit.get(4));
-         defence=Integer.parseInt(typeUnit.get(5));
          int visionRange=Integer.parseInt(typeUnit.get(6));
          int expirenceValue=Integer.parseInt(typeUnit.get(7));
          return new Monster(name,tile,health,attack,defence,visionRange,expirenceValue);
       }
       if(type.equals("Trap")){
-         tile=typeUnit.get(2).charAt(0);
-         health=Integer.parseInt(typeUnit.get(3));
-         attack=Integer.parseInt(typeUnit.get(4));
-         defence=Integer.parseInt(typeUnit.get(5));
          int visibilityTime=Integer.parseInt(typeUnit.get(7));
          int invisibilityTime=Integer.parseInt(typeUnit.get(8));
          int expirenceValue=Integer.parseInt(typeUnit.get(6));
          return new Trap(name,tile,health,attack,defence,expirenceValue,visibilityTime,invisibilityTime);
       }
-      tile='@';
-      health=Integer.parseInt(typeUnit.get(2));
-      attack=Integer.parseInt(typeUnit.get(3));
-      defence=Integer.parseInt(typeUnit.get(4));
       if(type.equals("Warrior")){
-         int cooldown=Integer.parseInt(typeUnit.get(5));
+         int cooldown=Integer.parseInt(typeUnit.get(6));
          return new Warrior(name,tile,health,attack,defence,cooldown);
       }
       if(type.equals("Rogue")){
-         int cost=Integer.parseInt(typeUnit.get(5));
+         int cost=Integer.parseInt(typeUnit.get(6));
          return new Rogue(name,tile,health,attack,defence,cost);
       }
       if(type.equals("Mage")){
-         int manaPool=Integer.parseInt(typeUnit.get(5));
-         int manaCost=Integer.parseInt(typeUnit.get(6));
-         int spellPower=Integer.parseInt(typeUnit.get(7));
-         int hitCount=Integer.parseInt(typeUnit.get(8));
-         int range=Integer.parseInt(typeUnit.get(9));
+         int manaPool=Integer.parseInt(typeUnit.get(6));
+         int manaCost=Integer.parseInt(typeUnit.get(7));
+         int spellPower=Integer.parseInt(typeUnit.get(8));
+         int hitCount=Integer.parseInt(typeUnit.get(9));
+         int range=Integer.parseInt(typeUnit.get(10));
          return new Mage(name,tile,health,attack,defence,manaPool,manaCost,spellPower,hitCount,range);
       }
-
       return null;
    }
 }
