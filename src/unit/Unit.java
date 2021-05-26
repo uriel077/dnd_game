@@ -1,9 +1,13 @@
 package unit;
 import game.Coordinate;
+import game.GameManager;
 import handlers.MoveHandler;
 import game.Health;
 import unit.enemy.Enemy;
 
+import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 public abstract class Unit {
     private String name;
@@ -13,7 +17,7 @@ public abstract class Unit {
     private Coordinate coordinate = new Coordinate();
     private String tile;
     private Random rnd = new Random();
-
+    public static GameManager gameManager;
     public Unit(String name, Health hp, int ap, int dp, Coordinate pos, String tile){
         this.name = name;
         this.health = hp;
@@ -24,26 +28,40 @@ public abstract class Unit {
 
     }
 
-    public String[] attack(Unit defender){
+    public List<String> attack(Unit defender){
+        List<String> msg = new ArrayList<String>();
         int ar = rnd.nextInt(this.getAttackPoints() + 1);
-        System.out.println(name + " rolled " + ar + "attack points.");
-        int damage = defender.defence(ar);
-        System.out.println(name + " dealt " + damage + " damage to" + defender + ".");
+        msg.add(getName() + " rolled " + ar + "attack points.");
+        int [] combatInfo = defender.defence(ar);
+        msg.add(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
+        msg.add(getName() + " dealt " + combatInfo[1] + " damage to" + defender + ".");
+        return msg;
     }
 
-    public int defence(int ar){
-        int dr = rnd.nextInt(getDefencePoints());
-        System.out.println(name + " rolled " + dr + " defence points.");
-        int damage = Math.max(ar - dr, 0);
-        this.health.healthAmount -= damage;
-        return dr;
+    public int[] defence(int ar){
+        int [] combatInfo = new int[2];
+        combatInfo[0] = rnd.nextInt(getDefencePoints());
+        combatInfo[1] = Math.max(ar - combatInfo[0], 0);
+        this.setCurrentHealth(getCurrentHealth() - combatInfo[1]);
+        return combatInfo;
     }
 
     public abstract void move(Coordinate moveTo);
 
 
-    public void turn(int tick){
+    public abstract List<String> turn(int tick);
 
+    public String toString() {
+        return tile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String description(){
+        return getName() + "\t" + "Health: " + getCurrentHealth() + "/" + getHealth().healthPool + "\t" +
+                "Attack: " + getAttackPoints() + "\t" + "Defence: " + getDefencePoints();
     }
 
     public int getAttackPoints() {
@@ -58,27 +76,32 @@ public abstract class Unit {
        this.attackPoints = ap;
     }
 
-    public int setDefencePoints(int dp) {
+    public void setDefencePoints(int dp) {
         this.defencePoints = dp;
-    }
-
-    public String getTile() {
-        return tile;
     }
 
     public void setTile(String tile) {
         this.tile = tile;
     }
 
-    public String getName() {
-        return name;
-    }
     public Health getHealth() {
         return health;
     }
 
+    public void setHealth(int ha, int hp){
+        ha = Math.max(ha, 0);
+        health = new Health(ha, hp);
+        if (this.isDead()){
+            //gameManager.removeTurn(this);
+        }
+    }
+
     public int getCurrentHealth() {
         return health.healthAmount;
+    }
+
+    public void setCurrentHealth(int currentHealth){
+        this.setHealth(currentHealth, this.health.healthPool);
     }
 
     public Coordinate getCoordinate() {
@@ -87,5 +110,9 @@ public abstract class Unit {
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public boolean isDead(){
+        return health.isDead();
     }
 }
