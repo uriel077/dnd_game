@@ -17,10 +17,10 @@ public abstract class Unit {
     private int attackPoints;
     private int defencePoints;
     private Coordinate coordinate = new Coordinate();
-    private String tile;
+    private char tile;
     private Random rnd = new Random();
     public static GameManager gameManager;
-    public Unit(String name, Health hp, int ap, int dp, Coordinate pos, String tile){
+    public Unit(String name, char tile, Health hp, int ap, int dp, Coordinate pos){
         this.name = name;
         this.health = hp;
         this.attackPoints = ap;
@@ -28,6 +28,12 @@ public abstract class Unit {
         this.coordinate = pos;
         this.tile = tile;
 
+    }
+    public Unit(String name, char tile, Health hp, int ap, int dp){
+        this( name,  tile,  hp,  ap,  dp, new Coordinate());
+    }
+    public Unit(String name, char tile, int hp, int ap, int dp){
+        this( name,  tile,  new Health(hp,hp),  ap,  dp, new Coordinate());
     }
 
     public List<String> attack(Unit defender){
@@ -56,7 +62,7 @@ public abstract class Unit {
 
 
     public String toString() {
-        return tile;
+        return tile+"";
     }
 
     public String getName() {
@@ -84,7 +90,7 @@ public abstract class Unit {
         this.defencePoints = dp;
     }
 
-    public void setTile(String tile) {
+    public void setTile(char tile) {
         this.tile = tile;
     }
 

@@ -19,9 +19,9 @@ public class Rogue extends Player{
     }
     @Override
     public List<String> castAbility(){
-        List<Unit> potenTarget= TargetHandler.candidateTarget(this,this.cordinate,this.abilityRange);
+        List<Unit> potenTarget= TargetHandler.candidateTarget(this,this.getCoordinate(),this.abilityRange);
         List<String> message=new ArrayList<String>();
-       message.add(this.name+" cast "+this.abilityName);
+       message.add(this.getName()+" cast "+this.abilityName);
         for(Unit target:potenTarget){
        //     message.add(this.attack(target));
         }
