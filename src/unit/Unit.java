@@ -1,4 +1,5 @@
 package unit;
+
 import game.Coordinate;
 import game.GameManager;
 import handlers.MoveHandler;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 public abstract class Unit {
+
     private String name;
     private Health health = new Health(0,0);
     private int attackPoints;
@@ -50,6 +52,8 @@ public abstract class Unit {
 
 
     public abstract List<String> turn(int tick);
+
+
 
     public String toString() {
         return tile;

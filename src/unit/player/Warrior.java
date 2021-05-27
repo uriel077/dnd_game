@@ -1,4 +1,7 @@
 package unit.player;
 
-public class Warrior {
+public class Warrior extends Player {
+    public Warrior(String name,char tile,int health,int attack,int defence,int cooldown){
+        super(name,tile,health,attack,defence);
+    }
 }

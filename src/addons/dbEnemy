@@ -1,0 +1,13 @@
+Monster|Lannister Solider|s|80|8|3|3|25
+Monster|Lannister Knight|k|200|14|8|4|50
+Monster|Queens Guard|q|400|20|15|5|100
+Monster|Wright|z|600|30|15|3|100
+Monster|Bear-Wright|b|1000|75|30|4|250
+Monster|Giant-Wright|g|1500|100|40|5|500
+Monster|White Walker|w|2000|150|50|6|1000
+Monster|The Mountain|M|1000|60|25|6|500
+Monster|Queen Cersei|C|100|10|10|1|1000
+Monster|Nights King|K|5000|300|150|8|5000
+Trap|Bonus Trap|B|1|1|1|250|1|5
+Trap|Queens Trap|Q|250|50|10|100|3|7
+Trap|Death Trap|D|500|100|20|250|1|10
