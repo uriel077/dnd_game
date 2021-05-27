@@ -1,4 +1,6 @@
 package unit.enemy;
 
-public class Enemy {
+import unit.Unit;
+
+public class Enemy extends Unit {
 }
