@@ -11,7 +11,7 @@ public class main {
         Health h =new Health(1,5);
         Rogue rog=new Rogue("",'w',1,5,5,5);
         TargetHandler.candidateTarget(rog,new Coordinate(),8);
-        String address="D:\\projects\\levels_dir";
+        String address="D:\\study\\data_structre\\projects\\levels_dir";
         GameManager gameManager=new GameManager(address);
 
     }

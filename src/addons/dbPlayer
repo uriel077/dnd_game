@@ -1,6 +1,6 @@
-Warrior|1|Jon Snow|300|30|4|3
-Warrior|2|The Hound|400|20|6|5
-Mage|3|Melisandre|100|5|1|300|30|15|5|6
-Mage|4|Thoros of Myr|250|25|4|150|20|20|3|4
-Rogue|5|Arya Stark|150|40|2|20
-Rogue|6|Bronn|250|35|3|50
+Warrior|Jon Snow|1|300|30|4|3
+Warrior|The Hound|2|400|20|6|5
+Mage|Melisandre|3|100|5|1|300|30|15|5|6
+Mage|Thoros of Myr|4|250|25|4|150|20|20|3|4
+Rogue|Arya Stark|5|150|40|2|20
+Rogue|Bronn|6|250|35|3|50

@@ -1,6 +1,8 @@
 package unit.player;
 
 import enums.UserInput;
+import game.Coordinate;
+import game.Health;
 import unit.Unit;
 
 import java.util.Arrays;
@@ -13,7 +15,7 @@ public class Player extends Unit {
     public String abilityName="";
     public int abilityRange=0;
     public Player(String name, char tile, int health, int attack, int defence) {
-        //super( name, tile,  health, attack, defence);
+        super( name, tile, health, attack, defence);
     }
 
 //    @Override
@@ -42,8 +44,14 @@ public class Player extends Unit {
         if(resource-cost>=0)
             return castAbility();
         else
-            return Arrays.asList(new String[]{this.name+" tried to cast "+this.abilityName+", but there was not enough energy: "+resource+"/"+cost});
+            return Arrays.asList(new String[]{this.getName()+" tried to cast "+this.abilityName+", but there was not enough energy: "+resource+"/"+cost});
     }
+
+    @Override
+    public void move(Coordinate moveTo) {
+
+    }
+
     public List<String> turn(int turnCount){
         UserInput input=UserInput.Wait;
         //input=InputHandler.getInput

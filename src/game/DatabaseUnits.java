@@ -48,7 +48,7 @@ public class DatabaseUnits {
       for (String unitStr:enemyUnit) {
          ArrayList<String> argumentUnit= new ArrayList<String>(Arrays.asList(unitStr.split("\\|")));
          Unit unitObj=facrotyUnit(argumentUnit);
-         map.put(unitObj.tile,unitObj);
+         map.put(unitObj.toString(),unitObj);
       }
 
    }
