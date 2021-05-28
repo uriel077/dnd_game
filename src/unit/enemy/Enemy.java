@@ -7,6 +7,7 @@ import unit.Unit;
 import java.util.List;
 
 public class Enemy extends Unit {
+    public int experienceValue=0;
     public Enemy(String name, char tile, int hp, int ap, int dp, Coordinate pos) {
         super(name, tile, hp, ap, dp);
     }

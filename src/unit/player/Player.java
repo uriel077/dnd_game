@@ -4,6 +4,7 @@ import enums.UserInput;
 import game.Coordinate;
 import game.Health;
 import unit.Unit;
+import unit.enemy.Enemy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,19 +36,32 @@ public class Player extends Unit {
         this.getHealth().healthPool+=10*this.playerLevel;
         this.setCurrentHealth(this.getHealth().healthPool);
         this.setAttackPoints(this.getAttackPoints()+4*this.playerLevel);
-        this.setDefencePoints(getDefencePoints()+1*this.playerLevel);
+        this.setDefencePoints(getDefencePoints()+ this.playerLevel);
          }
 
     public void setExperience(int experience) {
         this.experience = experience;
-        while (experience>=50*getExperience()) {
+        while (experience>=50*playerLevel) {
             int[] saveState=new int[]{this.getHealth().healthPool,this.getAttackPoints(),this.getDefencePoints()};
             levelUp();
             this.messageContainer.add(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");
         }
     }
+    private void gainXp(int xp){
+        setExperience(getExperience()+xp);
+    }
 
-    public List<String> tryCastAbility(int resource,int cost){
+    public List<String> attack(Enemy defender){
+        List<String> message=super.attack(defender);
+        if(defender.isDead())
+            gainXp(defender.experienceValue);
+        return message;
+    }
+    public void setAbilityName(String abilityName) {
+        this.abilityName = abilityName;
+    }
+
+    public List<String> tryCastAbility(int resource, int cost){
         if(resource-cost>=0)
             return castAbility();
         else
