@@ -39,7 +39,7 @@ public abstract class Unit {
     public List<String> attack(Unit defender){
         List<String> msg = new ArrayList<String>();
         int ar = rnd.nextInt(this.getAttackPoints() + 1);
-        msg.add(getName() + " rolled " + ar + "attack points.");
+        msg.add(getName() + " rolled " + ar + " attack points.");
         int [] combatInfo = defender.defence(ar);
         msg.add(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
         msg.add(getName() + " dealt " + combatInfo[1] + " damage to" + defender + ".");
