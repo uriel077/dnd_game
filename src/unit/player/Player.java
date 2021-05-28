@@ -5,39 +5,46 @@ import game.Coordinate;
 import game.Health;
 import unit.Unit;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Player extends Unit {
 
     private int experience=0;
-    private int playerLevel =1;
+    public int playerLevel =1;
     public String abilityName="";
     public int abilityRange=0;
+    private List<String> messageContainer=new ArrayList<>();
     public Player(String name, char tile, int health, int attack, int defence) {
         super( name, tile, health, attack, defence);
     }
 
-//    @Override
-//    public String description() {
-//        return super.description()+"\tLevel: "+playerLevel+"\tExperience:"+getExperience()+"/"+getExperience()*playerLevel;
-//    }
+    @Override
+    public String description() {
+        return super.description()+"\tLevel: "+playerLevel+"\tExperience:"+getExperience()+"/"+getExperience()*playerLevel;
+    }
 
     public int getExperience() {
         return experience;
     }
-    private void levelUp(){
+
+    public void levelUp(){
         this.experience -= 50*this.playerLevel;
         this.playerLevel+=1;
-        //this.getHealth().healthPool+=10*this.playerLevel;
-        //this.setCurrentHealth(this.getHealth().healthPool);
-        //this.setAttack(getAttack()+4*this.playerLevel);
-        //this.setDefence(getAttack()+1*this.playerLevel);
-    }
+        this.getHealth().healthPool+=10*this.playerLevel;
+        this.setCurrentHealth(this.getHealth().healthPool);
+        this.setAttackPoints(this.getAttackPoints()+4*this.playerLevel);
+        this.setDefencePoints(getDefencePoints()+1*this.playerLevel);
+         }
+
     public void setExperience(int experience) {
         this.experience = experience;
-        while (experience>=50*getExperience())
+        while (experience>=50*getExperience()) {
+            int[] saveState=new int[]{this.getHealth().healthPool,this.getAttackPoints(),this.getDefencePoints()};
             levelUp();
+            this.messageContainer.add(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");
+        }
     }
 
     public List<String> tryCastAbility(int resource,int cost){
@@ -53,13 +60,14 @@ public class Player extends Unit {
     }
 
     public List<String> turn(int turnCount){
+        messageContainer.clear();
         UserInput input=UserInput.Wait;
-        //input=InputHandler.getInput
+        //input=InputHandler.getInput;
         if(input==UserInput.CastAbility)
-           return this.castAbility();
+           messageContainer.addAll( this.castAbility());
        // else
             //return MoveHandler(this,input);
-        return null;
+        return messageContainer;
     }
     public  List<String> castAbility(){
         return null;
