@@ -3,6 +3,7 @@ package unit.player;
 import enums.UserInput;
 import game.Coordinate;
 import game.Health;
+import handlers.InputHandler;
 import unit.Unit;
 import unit.enemy.Enemy;
 
@@ -16,6 +17,7 @@ public class Player extends Unit {
     public int playerLevel =1;
     public String abilityName="";
     public int abilityRange=0;
+    private int LEVEL_SIZE=50;
     private List<String> messageContainer=new ArrayList<>();
     public Player(String name, char tile, int health, int attack, int defence) {
         super( name, tile, health, attack, defence);
@@ -28,7 +30,7 @@ public class Player extends Unit {
 
     @Override
     public String description() {
-        return super.description()+"\tLevel: "+playerLevel+"\tExperience:"+getExperience()+"/"+getExperience()*playerLevel;
+        return super.description()+"\tLevel: "+playerLevel+"\tExperience:"+getExperience()+"/"+LEVEL_SIZE*playerLevel;
     }
 
     public int getExperience() {
@@ -36,7 +38,7 @@ public class Player extends Unit {
     }
 
     public void levelUp(){
-        this.experience -= 50*this.playerLevel;
+        this.experience -=LEVEL_SIZE*this.playerLevel;
         this.playerLevel+=1;
         this.getHealth().healthPool+=10*this.playerLevel;
         this.setCurrentHealth(this.getHealth().healthPool);
@@ -46,7 +48,7 @@ public class Player extends Unit {
 
     public void setExperience(int experience) {
         this.experience = experience;
-        while (experience>=50*playerLevel) {
+        while (experience>=LEVEL_SIZE*playerLevel) {
             int[] saveState=new int[]{this.getHealth().healthPool,this.getAttackPoints(),this.getDefencePoints()};
             levelUp();
             this.messageContainer.add(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");
@@ -80,8 +82,7 @@ public class Player extends Unit {
 
     public List<String> turn(int turnCount){
         messageContainer.clear();
-        UserInput input=UserInput.Wait;
-        //input=InputHandler.getInput;
+        UserInput input=InputHandler.inputPlayerGame();
         if(input==UserInput.CastAbility)
            messageContainer.addAll( this.castAbility());
        // else

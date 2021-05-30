@@ -1,6 +1,8 @@
 package game;
 
 import handlers.InputHandler;
+import handlers.MoveHandler;
+import handlers.TargetHandler;
 import unit.Unit;
 import unit.enemy.Enemy;
 import unit.player.Player;
@@ -19,10 +21,15 @@ public class GameManager {
     private  List<File> levelsFiles=new ArrayList<File>();
     public GameManager(){
         DatabaseUnits.buildDictionary();
+        UI.gameBoard=this.gameBoard;
+        TargetHandler.gameBoard=this.gameBoard;
+        MoveHandler.gameBoard=this.gameBoard;
     }
 
     public void start(String address){
-        Player p = getPlayerMenu();
+    //    gameBoard.player=getPlayerMenu();
+        getPlayerMenu();
+
         createListOfLevel(address);
         for (File level:levelsFiles) {
             // if(gameBoard.player.isDead())
@@ -31,9 +38,9 @@ public class GameManager {
             startLevel();
         }
         // if(gameBoard.player.isDead())
-        //  UI.printLevel("Game Over.");
+          UI.printLevel("Game Over.");
         //else
-        //  UI.printLevel("You Won.");
+         UI.printLevel("You Won.");
     }
 
     private void startLevel() {
@@ -41,24 +48,24 @@ public class GameManager {
         tickCount=0;
       //  while(!gameBoard.player.isDead()&&gameBoard.size()!=0)
         {
-            //UI.printLevel(player,msg)
+            UI.printLevel(msg);
             tickCount+=1;
             msg=onTick();
         }
       //  if(gameBoard.player.isDead()){
-        //msg.add("You Lost");
-
-        //UI.printLevel(msg);
+        msg.add("You Lost");
+        UI.printLevel(msg);
     }
 
     /**
      * get the player choose
      * @return the choosen player
      */
-    private Player getPlayerMenu(){
-        //UI.printMenu(gameBoard.players);
+    private void getPlayerMenu(){
+        UI.printMenu();
         char choose= InputHandler.inputMenu();
-        return (Player) DatabaseUnits.playerPool.get(choose);//.copy();
+        //gameBoard.player=(Player) DatabaseUnits.playerPool.get(choose);//.copy();
+        UI.printChoosenPlayer();
 
     }
 
@@ -79,6 +86,13 @@ public class GameManager {
 
     public void loadGame(File file){
       //  gameBoard.buildBoard(file);
+        listTurn.clear();
+//        for(Player player:gameBoard.players){
+//            listTurn.add(player);
+//        }
+//        for(Player enemy:gameBoard.enemies){
+//            listTurn.add(enemy);
+//        }
     }
     public List<String> onTick(){
         List<String> message=new ArrayList<String>();
@@ -106,6 +120,7 @@ public class GameManager {
     }
     public void removeTurn(Enemy e){
         listTurn.remove(e);
+       // gameBoard.enemies.remove(e);
 
     }
 }
