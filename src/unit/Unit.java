@@ -19,7 +19,8 @@ public abstract class Unit {
     private Coordinate coordinate = new Coordinate();
     private char tile;
     private Random rnd = new Random();
-    public static GameManager gameManager;
+    static GameManager gameManager;
+
     public Unit(String name, char tile, Health hp, int ap, int dp, Coordinate pos){
         this.name = name;
         this.health = hp;
@@ -29,17 +30,18 @@ public abstract class Unit {
         this.tile = tile;
 
     }
-    public Unit(String name, char tile, Health hp, int ap, int dp){
-        this( name,  tile,  hp,  ap,  dp, new Coordinate());
-    }
+
     public Unit(String name, char tile, int hp, int ap, int dp){
         this( name,  tile,  new Health(hp,hp),  ap,  dp, new Coordinate());
     }
 
+
+    public abstract Unit copy();
+
     public List<String> attack(Unit defender){
         List<String> msg = new ArrayList<String>();
         int ar = rnd.nextInt(this.getAttackPoints() + 1);
-        msg.add(getName() + " rolled " + ar + "attack points.");
+        msg.add(getName() + " rolled " + ar + " attack points.");
         int [] combatInfo = defender.defence(ar);
         msg.add(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
         msg.add(getName() + " dealt " + combatInfo[1] + " damage to" + defender + ".");
@@ -55,7 +57,6 @@ public abstract class Unit {
     }
 
     public abstract void move(Coordinate moveTo);
-
 
     public abstract List<String> turn(int tick);
 
@@ -118,8 +119,9 @@ public abstract class Unit {
         return coordinate;
     }
 
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
+    public void setCoordinate(int i, int j) {
+        //this.coordinate.x = i; TODO: delete comment
+        //this.coordinate.y = j;
     }
 
     public boolean isDead(){
