@@ -19,6 +19,11 @@ public class Player extends Unit {
     private List<String> messageContainer=new ArrayList<>();
     public Player(String name, char tile, int health, int attack, int defence) {
         super( name, tile, health, attack, defence);
+
+    }
+    public Player(String name, char tile, Health health, int attack, int defence) {
+        super( name, tile, health, attack, defence);
+
     }
 
     @Override
@@ -85,5 +90,10 @@ public class Player extends Unit {
     }
     public  List<String> castAbility(){
         return null;
+    }
+
+    public Player copy()
+    {
+       return new Player(this.getName(),this.toString().charAt(0),this.getCurrentHealth(),this.getAttackPoints(),this.getDefencePoints());
     }
 }

@@ -50,5 +50,10 @@ public class Rogue extends Player{
         return super.description()+"\tEnergy: "+currentEnergy+"/"+MAX_ENERGY;
     }
 
+    @Override
+    public Rogue copy()
+    {
+        return new Rogue(this.getName(),this.toString().charAt(0),this.getCurrentHealth(),this.getAttackPoints(),this.getDefencePoints(),this.cost);
+    }
 
 }
