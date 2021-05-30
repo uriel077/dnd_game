@@ -12,7 +12,8 @@ public class main {
         Rogue rog=new Rogue("",'w',1,5,5,5);
         TargetHandler.candidateTarget(rog,new Coordinate(),8);
         String address="D:\\study\\data_structre\\projects\\levels_dir";
-        GameManager gameManager=new GameManager(address);
+        GameManager gameManager=new GameManager();
+        gameManager.start(address);
 
     }
 }

@@ -1,7 +1,6 @@
 package unit.enemy;
 
 import game.Coordinate;
-import unit.Unit;
 
 public class Trap extends Enemy {
     public Trap(String name, char tile, int hp, int ap, int dp, int expirenceValue, int visibilityTime, int invisibilityTime, Coordinate pos){
@@ -9,7 +8,7 @@ public class Trap extends Enemy {
 
     }
     public Trap(String name, char tile, int hp, int ap, int dp, int expirenceValue, int visibilityTime, int invisibilityTime){
-        super(name, tile, hp, ap, dp);
+        super(name, tile, hp, ap, dp, new Coordinate());
 
     }
 }
