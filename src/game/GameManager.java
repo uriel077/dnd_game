@@ -54,6 +54,7 @@ public class GameManager {
     }
 
     private Player getPlayerMenu(){
+        //UI.printMenu(gameBoard.players);
         //char choose=InputHandler.charcterChoose();
         //return DatabaseUnits.playerPool.get(choose);
         return null;

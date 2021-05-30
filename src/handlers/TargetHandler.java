@@ -21,7 +21,7 @@ public class TargetHandler {
        return closeEnemy;
     }
 
-    public static List<Unit> candidateTarget(Enemy player, Coordinate cord, int range){
+    public static List<Unit> candidateTarget(Enemy enemy, Coordinate cord, int range){
         List<Unit> closePlayer=new ArrayList<>();
         //  for (Player player:gameBoard.player)
         { //if( cord.range(player)<=range)
@@ -30,5 +30,14 @@ public class TargetHandler {
         }
         return closePlayer;
     }
+    public static List<Unit> candidateTarget(Enemy enemy, int range){
+
+        return candidateTarget(enemy,enemy.getCoordinate(),range);
+    }
+    public static List<Unit> candidateTarget(Player player, int range){
+
+        return candidateTarget(player,player.getCoordinate(),range);
+    }
+
 
 }
