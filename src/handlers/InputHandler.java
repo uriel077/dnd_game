@@ -7,11 +7,12 @@ import java.util.Scanner;
 
 public class InputHandler {
 
-    private static String userInputRegex=UserInput.CastAbility.getRegex();
+    private static String userInputRegex="["+UserInput.CastAbility.getRegex()+"]";
     private static String menuRegex="[1-"+ DatabaseUnits.playerPool.size() +"]";
 
     public static UserInput inputPlayerGame(){
-        return UserInput.valueOf(inputCache(userInputRegex)+"");
+
+        return UserInput.findByKey(inputCache(userInputRegex)+"");
 
     }
     public static  char inputMenu(){

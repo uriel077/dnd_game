@@ -5,18 +5,21 @@ import unit.Unit;
 import unit.player.Player;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameBoard {
     private int length;
     private int width;
     public Player player;
-    public List<Unit> enemies;
+    public List<Unit> enemies= new ArrayList<Unit>();
     private HashMap<Coordinate, Wall> walls = new HashMap<Coordinate, Wall>();
     private String[][]board;
+    public void buildBoard(File mapFile,Player player){
+        this.player=player;
+        buildBoard(mapFile);
+    }
     public void buildBoard(File mapFile) {
+        walls.clear();
         try {
             Scanner mapReader = new Scanner(mapFile);
             int i = 0, j=0;
@@ -25,15 +28,18 @@ public class GameBoard {
             String data;
             while (mapReader.hasNextLine()){
                 data = mapReader.nextLine();
+
                 j = 0;
                for (char ch: data.toCharArray()){
-                    if (ch == '@')
-                        player.setCoordinate(i,j);
+                    if (ch == '@') {
+                        player.setCoordinate(i, j);
+                        player.setTile('@');
+                    }
                     if (ch == '#')
-                        Pos = new Coordinate(i,j); //TODO: delete comment
+                        Pos = new Coordinate(i,j);
                         walls.put(Pos, new Wall(Pos));
-                    if (DatabaseUnits.enemyPool.containsKey(ch)){
-                        enemy = DatabaseUnits.enemyPool.get(ch).copy();
+                    if (DatabaseUnits.enemyPool.containsKey(ch+"")){
+                        enemy = DatabaseUnits.enemyPool.get(ch+"").copy();
                         enemy.setCoordinate(i,j);
                         enemies.add(enemy);
                     }
@@ -48,11 +54,8 @@ public class GameBoard {
         catch (Exception e){}
     }
     public void buildArray(){
-        for (String[] line : board) {
-            for (String block : line) {
-                block = ".";
-            }
-        }
+        for (String[] row: board)
+            Arrays.fill(row, ".");
         board[player.getCoordinate().x][player.getCoordinate().y] =player.toString();
         for (Unit enemy : this.enemies){
             board[enemy.getCoordinate().x][enemy.getCoordinate().y] = enemy.toString();

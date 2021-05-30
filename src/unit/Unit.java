@@ -2,11 +2,9 @@ package unit;
 
 import game.Coordinate;
 import game.GameManager;
-import handlers.MoveHandler;
 import game.Health;
-import unit.enemy.Enemy;
+import game.UI;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +17,7 @@ public abstract class Unit {
     private Coordinate coordinate = new Coordinate();
     private char tile;
     private Random rnd = new Random();
-    static GameManager gameManager;
+    public static GameManager gameManager;
 
     public Unit(String name, char tile, Health hp, int ap, int dp, Coordinate pos){
         this.name = name;
@@ -53,6 +51,7 @@ public abstract class Unit {
         combatInfo[0] = rnd.nextInt(getDefencePoints());
         combatInfo[1] = Math.max(ar - combatInfo[0], 0);
         this.setCurrentHealth(getCurrentHealth() - combatInfo[1]);
+        UI.print(this.description());
         return combatInfo;
     }
 
@@ -102,9 +101,7 @@ public abstract class Unit {
     public void setHealth(int ha, int hp){
         ha = Math.max(ha, 0);
         health = new Health(ha, hp);
-        if (this.isDead()){
-            //gameManager.removeTurn(this);
-        }
+
     }
 
     public int getCurrentHealth() {
@@ -120,8 +117,8 @@ public abstract class Unit {
     }
 
     public void setCoordinate(int i, int j) {
-        //this.coordinate.x = i; TODO: delete comment
-        //this.coordinate.y = j;
+        this.coordinate.x = i;
+        this.coordinate.y = j;
     }
 
     public boolean isDead(){

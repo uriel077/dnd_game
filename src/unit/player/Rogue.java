@@ -17,6 +17,7 @@ public class Rogue extends Player{
         this.abilityName=ABILITY_NAME;
         this.abilityRange=2;
         this.cost=cost;
+        currentEnergy=MAX_ENERGY;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class Rogue extends Player{
         return message;
     }
     @Override
-    public List<String> tryCastAbility(int resource, int cost){
+    public List<String> tryCastAbility(){
         return super.tryCastAbility(currentEnergy,cost);
     }
     @Override

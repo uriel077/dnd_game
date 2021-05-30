@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class GameManager {
+    List<String> messages=new ArrayList<String>();
     public GameBoard gameBoard= new GameBoard();
     public List<Unit> listTurn=new ArrayList<Unit>();
     private int tickCount=0;
@@ -24,6 +25,7 @@ public class GameManager {
         UI.gameBoard=this.gameBoard;
         TargetHandler.gameBoard=this.gameBoard;
         MoveHandler.gameBoard=this.gameBoard;
+        Unit.gameManager=this;
     }
 
     public void start(String address){
@@ -42,16 +44,21 @@ public class GameManager {
     }
 
     private void startLevel() {
+        List<String> message=new ArrayList<String>();
         List<String> msg=new ArrayList<String>();
         tickCount=0;
         while(!gameBoard.player.isDead()&&gameBoard.enemies.size()!=0)
         {
-            UI.printLevel(msg);
+
+            UI.printLevel(message);
+            message.clear();
             tickCount+=1;
             msg=onTick();
+            if(msg!=null)
+                message.addAll(msg);
         }if(gameBoard.player.isDead())
-            msg.add("You Lost");
-        UI.printLevel(msg);
+            message.add("You Lost");
+        UI.printLevel(message);
     }
 
     /**
@@ -91,16 +98,20 @@ public class GameManager {
         }
     }
     public List<String> onTick(){
-        List<String> message=new ArrayList<String>();
+        messages=new ArrayList<String>();
         ListIterator<Unit> iter = listTurn.listIterator();
+        List<String> msg=new ArrayList<String>();
         while(iter.hasNext()){
-               if(!gameBoard.player.isDead())
-                message.addAll(iter.next().turn(tickCount));
+               if(!gameBoard.player.isDead()) {
+                   msg = iter.next().turn(tickCount);
+                   if (msg != null)
+                       messages.addAll(msg);
+               }
             else{
              break;
              }
         }
-        return message;
+        return messages;
     }
 
     public int getTickCount() {

@@ -55,13 +55,17 @@ public class Player extends Unit {
         }
     }
     private void gainXp(int xp){
+
         setExperience(getExperience()+xp);
     }
 
+
     public List<String> attack(Enemy defender){
         List<String> message=super.attack(defender);
-        if(defender.isDead())
+        if(defender.isDead()){
+            message.add(defender.getName()+" died. "+this.getName()+defender.experienceValue);
             gainXp(defender.experienceValue);
+        }
         return message;
     }
     public void setAbilityName(String abilityName) {
@@ -74,6 +78,10 @@ public class Player extends Unit {
         else
             return Arrays.asList(new String[]{this.getName()+" tried to cast "+this.abilityName+", but there was not enough energy: "+resource+"/"+cost});
     }
+    public List<String> tryCastAbility(){
+
+        return null;
+        }
 
     @Override
     public void move(Coordinate moveTo) {
@@ -81,10 +89,11 @@ public class Player extends Unit {
     }
 
     public List<String> turn(int turnCount){
-        messageContainer.clear();
+        messageContainer=new ArrayList<String>();
         UserInput input=InputHandler.inputPlayerGame();
         if(input==UserInput.CastAbility)
-           messageContainer.addAll( this.castAbility());
+           messageContainer.addAll( this.tryCastAbility());
+
        // else
             //return MoveHandler(this,input);
         return messageContainer;
@@ -96,5 +105,12 @@ public class Player extends Unit {
     public Player copy()
     {
        return new Player(this.getName(),this.toString().charAt(0),this.getCurrentHealth(),this.getAttackPoints(),this.getDefencePoints());
+    }
+    @Override
+    public void setHealth(int ha, int hp){
+      super.setHealth(ha,hp);
+        if (this.isDead()){
+            gameManager.removeTurn(this);
+        }
     }
 }

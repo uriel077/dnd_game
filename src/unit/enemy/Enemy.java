@@ -17,7 +17,8 @@ public class Enemy extends Unit {
 
     @Override
     public Unit copy() {
-        return null;
+        return new Enemy(this.getName(), this.toString().charAt(0), this.getCurrentHealth(), this.getAttackPoints(), this.getDefencePoints()
+                ,this.experienceValue);
     }
 
     @Override
@@ -28,5 +29,13 @@ public class Enemy extends Unit {
     @Override
     public List<String> turn(int tick) {
     return null;
+    }
+
+    @Override
+    public void setHealth(int ha, int hp){
+        super.setHealth(ha,hp);
+        if (this.isDead()){
+            gameManager.removeTurn(this);
+        }
     }
 }
