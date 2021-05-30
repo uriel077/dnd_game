@@ -27,33 +27,30 @@ public class GameManager {
     }
 
     public void start(String address){
-    //    gameBoard.player=getPlayerMenu();
         getPlayerMenu();
-
         createListOfLevel(address);
         for (File level:levelsFiles) {
-            // if(gameBoard.player.isDead())
-            //  break;
+             if(gameBoard.player.isDead())
+              break;
             loadGame(level);
             startLevel();
         }
-        // if(gameBoard.player.isDead())
+        if(gameBoard.player.isDead())
           UI.printLevel("Game Over.");
-        //else
+        else
          UI.printLevel("You Won.");
     }
 
     private void startLevel() {
         List<String> msg=new ArrayList<String>();
         tickCount=0;
-      //  while(!gameBoard.player.isDead()&&gameBoard.size()!=0)
+        while(!gameBoard.player.isDead()&&gameBoard.enemies.size()!=0)
         {
             UI.printLevel(msg);
             tickCount+=1;
             msg=onTick();
-        }
-      //  if(gameBoard.player.isDead()){
-        msg.add("You Lost");
+        }if(gameBoard.player.isDead())
+            msg.add("You Lost");
         UI.printLevel(msg);
     }
 
@@ -64,7 +61,7 @@ public class GameManager {
     private void getPlayerMenu(){
         UI.printMenu();
         char choose= InputHandler.inputMenu();
-        //gameBoard.player=(Player) DatabaseUnits.playerPool.get(choose);//.copy();
+        gameBoard.player=(Player) DatabaseUnits.playerPool.get(choose+"").copy();
         UI.printChoosenPlayer();
 
     }
@@ -85,24 +82,23 @@ public class GameManager {
     }
 
     public void loadGame(File file){
-      //  gameBoard.buildBoard(file);
+        gameBoard.buildBoard(file);
         listTurn.clear();
-//        for(Player player:gameBoard.players){
-//            listTurn.add(player);
-//        }
-//        for(Player enemy:gameBoard.enemies){
-//            listTurn.add(enemy);
-//        }
+        listTurn.add(gameBoard.player);
+
+        for(Unit enemy:gameBoard.enemies){
+            listTurn.add(enemy);
+        }
     }
     public List<String> onTick(){
         List<String> message=new ArrayList<String>();
         ListIterator<Unit> iter = listTurn.listIterator();
         while(iter.hasNext()){
-            //   if(!gameBoard.player.isDead())
-            //message.add(unit.turn(tickCount));
-            //else{
-            // break;
-            // }
+               if(!gameBoard.player.isDead())
+                message.addAll(iter.next().turn(tickCount));
+            else{
+             break;
+             }
         }
         return message;
     }
@@ -120,7 +116,7 @@ public class GameManager {
     }
     public void removeTurn(Enemy e){
         listTurn.remove(e);
-       // gameBoard.enemies.remove(e);
+       gameBoard.enemies.remove(e);
 
     }
 }
