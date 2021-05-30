@@ -1,10 +1,30 @@
 package enums;
 
 public enum UserInput {
-    Up,
-    Down,
-    Left,
-    Right,
-    CastAbility,
-    Wait
+    Up("w"),
+    Down("s"),
+    Left("a"),
+    Right("d"),
+    CastAbility("e"),
+    Wait("q");
+
+    private String key;
+    UserInput(String key) {
+        this.key=key;
+    }
+
+    // getter method
+    public String getKey()
+    {
+        return this.key;
+    }
+    public String getRegex(){
+        String regex="";
+        for(UserInput inp : UserInput.values())
+        {
+            regex+=inp.getKey();
+        }
+        return regex;
+    }
+
 }

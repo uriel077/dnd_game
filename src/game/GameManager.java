@@ -1,5 +1,6 @@
 package game;
 
+import handlers.InputHandler;
 import unit.Unit;
 import unit.enemy.Enemy;
 import unit.player.Player;
@@ -17,15 +18,15 @@ public class GameManager {
     private int tickCount=0;
     private  List<File> levelsFiles=new ArrayList<File>();
     public GameManager(){
-
-    }
-    public GameManager(String address){
         DatabaseUnits.buildDictionary();
+    }
+
+    public void start(String address){
         Player p = getPlayerMenu();
         createListOfLevel(address);
         for (File level:levelsFiles) {
-           // if(gameBoard.player.isDead())
-              //  break;
+            // if(gameBoard.player.isDead())
+            //  break;
             loadGame(level);
             startLevel();
         }
@@ -33,32 +34,38 @@ public class GameManager {
         //  UI.printLevel("Game Over.");
         //else
         //  UI.printLevel("You Won.");
-
-
     }
 
     private void startLevel() {
         List<String> msg=new ArrayList<String>();
+        tickCount=0;
       //  while(!gameBoard.player.isDead()&&gameBoard.size()!=0)
         {
             //UI.printLevel(player,msg)
             tickCount+=1;
             msg=onTick();
         }
-        tickCount=0;
       //  if(gameBoard.player.isDead()){
         //msg.add("You Lost");
-            //UI.printLevel(player,msg);}
-        //else
+
         //UI.printLevel(msg);
     }
 
+    /**
+     * get the player choose
+     * @return the choosen player
+     */
     private Player getPlayerMenu(){
         //UI.printMenu(gameBoard.players);
-        //char choose=InputHandler.charcterChoose();
-        //return DatabaseUnits.playerPool.get(choose);
-        return null;
+        char choose= InputHandler.inputMenu();
+        return (Player) DatabaseUnits.playerPool.get(choose);//.copy();
+
     }
+
+    /**
+     * create list of files
+     * @param address the dir they are locate
+     */
     public void createListOfLevel(String address){
         File f = new File(address);
         File[] matchingFiles = f.listFiles(new FilenameFilter() {
@@ -69,6 +76,7 @@ public class GameManager {
         levelsFiles= Arrays.asList(matchingFiles);
         levelsFiles.sort((File f1,File f2)->f1.getName().compareTo(f2.getName()));
     }
+
     public void loadGame(File file){
       //  gameBoard.buildBoard(file);
     }
