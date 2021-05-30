@@ -16,6 +16,11 @@ public class Enemy extends Unit {
     }
 
     @Override
+    public Unit copy() {
+        return null;
+    }
+
+    @Override
     public void move(Coordinate moveTo) {
 
     }

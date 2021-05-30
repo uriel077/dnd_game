@@ -24,7 +24,7 @@ public class Player extends Unit {
 
     }
     public Player(String name, char tile, Health health, int attack, int defence) {
-        super( name, tile, health, attack, defence);
+        super( name, tile, health.healthAmount, attack, defence);//TODO: check again the constructor
 
     }
 
