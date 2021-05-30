@@ -9,11 +9,12 @@ import java.util.List;
 public class Rogue extends Player{
     private int currentEnergy;
     private int cost;
-    private int MAX_ENERGY=100;
+    private final int MAX_ENERGY=100;
+    private final String ABILITY_NAME="Fan of Knives";
 
     public Rogue(String name,char tile,int health,int attack,int defence,int cost){
         super(name,tile,health,attack,defence);
-            this.abilityName="Fan of Knives";
+        this.abilityName=ABILITY_NAME;
         this.abilityRange=2;
         this.cost=cost;
     }
