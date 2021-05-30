@@ -40,6 +40,7 @@ public class DatabaseUnits {
          fileText=Files.readString(fileName);
       }
       catch (IOException e){}
+
       return fileText;
    }
    private static void buildUnit(String address,Map<String, Unit > map){
@@ -63,7 +64,7 @@ public class DatabaseUnits {
       if(type.equals("Monster")){
          int visionRange=Integer.parseInt(typeUnit.get(6));
          int expirenceValue=Integer.parseInt(typeUnit.get(7));
-         return new Monster(name,tile,health,attack,defence,visionRange,expirenceValue);
+         return new Monster(name,tile,health,attack,defence,expirenceValue,visionRange);
       }
       if(type.equals("Trap")){
          int visibilityTime=Integer.parseInt(typeUnit.get(7));

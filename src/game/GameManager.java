@@ -21,7 +21,7 @@ public class GameManager {
     }
     public GameManager(String address){
         DatabaseUnits.buildDictionary();
-        //Player p = getPlayerMenu();
+        Player p = getPlayerMenu();
         createListOfLevel(address);
         for (File level:levelsFiles) {
            // if(gameBoard.player.isDead())
@@ -54,6 +54,7 @@ public class GameManager {
     }
 
     private Player getPlayerMenu(){
+        //UI.printMenu(gameBoard.players);
         //char choose=InputHandler.charcterChoose();
         //return DatabaseUnits.playerPool.get(choose);
         return null;
