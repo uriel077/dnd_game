@@ -27,6 +27,7 @@ public class TargetHandler {
              closePlayer.add(gameBoard.player);
         return closePlayer;
     }
+
     public static List<Player> candidateTarget(Enemy enemy, int range){
 
         return candidateTarget(enemy,enemy.getCoordinate(),range);
