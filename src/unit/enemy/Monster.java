@@ -38,8 +38,8 @@ public class Monster extends Enemy {
         }
         else
         {
-            Random random=new Random();
-          //  return this.move(rndArrs[random.nextInt(5)]) ;
+
+           //return this.move(rndArrs[(new Random().nextInt(6))]) ;
         }
         return null;
     }
@@ -47,5 +47,8 @@ public class Monster extends Enemy {
     public Unit copy() {
         return new Monster(this.getName(), this.toString().charAt(0), this.getCurrentHealth(), this.getAttackPoints(), this.getDefencePoints()
                 ,this.experienceValue,this.visionRange);
+    }
+    public String description() {
+        return super.description()+"\t\tVision Range: "+this.visionRange;
     }
 }

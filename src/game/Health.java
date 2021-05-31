@@ -14,4 +14,8 @@ public class Health {
     public boolean isDead() {
        return healthAmount<=0;
     }
+    @Override
+    public String toString() {
+        return "health amount:"+healthAmount+", health pool:"+healthPool;
+    }
 }
