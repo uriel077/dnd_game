@@ -13,7 +13,7 @@ public class GameBoard {
     public int width;
     public Player player;
     public List<Enemy> enemies= new ArrayList<Enemy>();
-    private HashMap<Coordinate, Wall> walls = new HashMap<Coordinate, Wall>();
+    public HashMap<Coordinate, Wall> walls = new HashMap<Coordinate, Wall>();
     private String[][]board;
     public void buildBoard(File mapFile,Player player){
         this.player=player;

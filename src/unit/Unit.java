@@ -59,6 +59,7 @@ public abstract class Unit {
         return combatInfo;
     }
 
+
     public abstract void move(UserInput moveDir);
 
     public abstract List<String> turn(int tick);
@@ -120,6 +121,9 @@ public abstract class Unit {
         return coordinate;
     }
 
+    public void setCoordinate(Coordinate cor){
+        this.coordinate = cor;
+    }
     public void setCoordinate(int i, int j) {
         this.coordinate.x = i;
         this.coordinate.y = j;

@@ -1,7 +1,6 @@
 package unit.player;
 
 import enums.UserInput;
-import game.Coordinate;
 import game.Health;
 import handlers.InputHandler;
 import unit.Unit;
@@ -82,6 +81,7 @@ public class Player extends Unit {
         }
 
     @Override
+
     public void move(UserInput moveDir) {
 
     }
