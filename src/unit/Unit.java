@@ -1,5 +1,6 @@
 package unit;
 
+import enums.UserInput;
 import game.Coordinate;
 import game.GameManager;
 import game.Health;
@@ -54,7 +55,7 @@ public abstract class Unit {
         return combatInfo;
     }
 
-    public abstract void move(Coordinate moveTo);
+    public abstract void move(UserInput moveTo);
 
     public abstract List<String> turn(int tick);
 
@@ -115,6 +116,9 @@ public abstract class Unit {
         return coordinate;
     }
 
+    public void setCoordinate(Coordinate cor){
+        this.coordinate = cor;
+    }
     public void setCoordinate(int i, int j) {
         this.coordinate.x = i;
         this.coordinate.y = j;
