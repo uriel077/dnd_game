@@ -38,8 +38,12 @@ public abstract class Unit {
     public abstract Unit copy();
 
     public List<String> attack(Unit defender){
+        return this.attack(defender,this.getAttackPoints());
+    }
+
+    public List<String> attack(Unit defender,int ap){
         List<String> msg = new ArrayList<String>();
-        int ar = rnd.nextInt(this.getAttackPoints() + 1);
+        int ar = rnd.nextInt(ap + 1);
         msg.add(getName() + " rolled " + ar + " attack points.");
         int [] combatInfo = defender.defence(ar);
         msg.add(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
@@ -55,12 +59,13 @@ public abstract class Unit {
         return combatInfo;
     }
 
-    public abstract void move(UserInput moveTo);
+
+    public abstract void move(UserInput moveDir);
 
     public abstract List<String> turn(int tick);
 
 
-
+    @Override
     public String toString() {
         return tile+"";
     }
@@ -70,8 +75,8 @@ public abstract class Unit {
     }
 
     public String description(){
-        return getName() + "\t" + "Health: " + getCurrentHealth() + "/" + getHealth().healthPool + "\t" +
-                "Attack: " + getAttackPoints() + "\t" + "Defence: " + getDefencePoints();
+        return getName() + "\t\t" + "Health: " + getCurrentHealth() + "/" + getHealth().healthPool + "\t\t" +
+                "Attack: " + getAttackPoints() + "\t\t" + "Defence: " + getDefencePoints();
     }
 
     public int getAttackPoints() {
@@ -100,8 +105,8 @@ public abstract class Unit {
 
     public void setHealth(int ha, int hp){
         ha = Math.max(ha, 0);
+        ha = Math.min(ha,hp);
         health = new Health(ha, hp);
-
     }
 
     public int getCurrentHealth() {

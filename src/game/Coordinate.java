@@ -18,5 +18,8 @@ public class Coordinate {
     public boolean isInRange(Coordinate c2, int range) {
         return range >= Math.sqrt(Math.pow((this.x - c2.x), 2) + Math.pow((this.y - c2.y), 2));
     }
-
+    @Override
+    public String toString() {
+        return "x:"+x+", y:"+y;
+    }
 }
