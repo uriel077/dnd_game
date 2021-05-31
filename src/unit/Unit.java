@@ -1,5 +1,6 @@
 package unit;
 
+import enums.UserInput;
 import game.Coordinate;
 import game.GameManager;
 import game.Health;
@@ -37,8 +38,12 @@ public abstract class Unit {
     public abstract Unit copy();
 
     public List<String> attack(Unit defender){
+        return this.attack(defender,this.getAttackPoints());
+    }
+
+    public List<String> attack(Unit defender,int ap){
         List<String> msg = new ArrayList<String>();
-        int ar = rnd.nextInt(this.getAttackPoints() + 1);
+        int ar = rnd.nextInt(ap + 1);
         msg.add(getName() + " rolled " + ar + " attack points.");
         int [] combatInfo = defender.defence(ar);
         msg.add(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
@@ -54,7 +59,7 @@ public abstract class Unit {
         return combatInfo;
     }
 
-    public abstract void move(Coordinate moveTo);
+    public abstract void move(UserInput moveDir);
 
     public abstract List<String> turn(int tick);
 
@@ -99,8 +104,8 @@ public abstract class Unit {
 
     public void setHealth(int ha, int hp){
         ha = Math.max(ha, 0);
+        ha = Math.min(ha,hp);
         health = new Health(ha, hp);
-
     }
 
     public int getCurrentHealth() {

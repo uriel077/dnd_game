@@ -38,8 +38,8 @@ public class Monster extends Enemy {
         }
         else
         {
-            Random random=new Random();
-          //  return this.move(rndArrs[random.nextInt(5)]) ;
+
+           //return this.move(rndArrs[(new Random().nextInt(6))]) ;
         }
         return null;
     }

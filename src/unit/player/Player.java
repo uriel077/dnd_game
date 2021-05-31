@@ -73,17 +73,17 @@ public class Player extends Unit {
     }
 
     public List<String> tryCastAbility(int resource, int cost){
+        List<String> messages=new ArrayList<>();
         if(resource-cost>=0)
-            return castAbility();
-        else
-            return Arrays.asList(new String[]{this.getName()+" tried to cast "+this.abilityName+", but there was not enough energy: "+resource+"/"+cost});
+            messages.addAll( castAbility());
+        return messages;
     }
     public List<String> tryCastAbility(){
         return null;
         }
 
     @Override
-    public void move(Coordinate moveTo) {
+    public void move(UserInput moveDir) {
 
     }
 @Override

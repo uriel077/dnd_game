@@ -1,5 +1,6 @@
 package unit.enemy;
 
+import enums.UserInput;
 import game.Coordinate;
 import unit.Unit;
 
@@ -22,7 +23,7 @@ public class Enemy extends Unit {
     }
 
     @Override
-    public void move(Coordinate moveTo) {
+    public void move(UserInput moveTo) {
 
     }
 
