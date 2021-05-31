@@ -11,7 +11,7 @@ public class Coordinate {
         this.y=y;
     }
     public boolean isInRange(Coordinate c2, int range) {
-        return range > Math.sqrt(Math.pow((this.x - c2.x), 2) + Math.pow((this.y - c2.y), 2));
+        return range >= Math.sqrt(Math.pow((this.x - c2.x), 2) + Math.pow((this.y - c2.y), 2));
     }
 
 }

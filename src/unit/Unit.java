@@ -51,7 +51,6 @@ public abstract class Unit {
         combatInfo[0] = rnd.nextInt(getDefencePoints());
         combatInfo[1] = Math.max(ar - combatInfo[0], 0);
         this.setCurrentHealth(getCurrentHealth() - combatInfo[1]);
-        UI.print(this.description());
         return combatInfo;
     }
 

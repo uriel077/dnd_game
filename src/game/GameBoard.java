@@ -2,6 +2,7 @@
 package game;
 
 import unit.Unit;
+import unit.enemy.Enemy;
 import unit.player.Player;
 
 import java.io.File;
@@ -11,7 +12,7 @@ public class GameBoard {
     private int length;
     private int width;
     public Player player;
-    public List<Unit> enemies= new ArrayList<Unit>();
+    public List<Enemy> enemies= new ArrayList<Enemy>();
     private HashMap<Coordinate, Wall> walls = new HashMap<Coordinate, Wall>();
     private String[][]board;
     public void buildBoard(File mapFile,Player player){
@@ -41,7 +42,7 @@ public class GameBoard {
                     if (DatabaseUnits.enemyPool.containsKey(ch+"")){
                         enemy = DatabaseUnits.enemyPool.get(ch+"").copy();
                         enemy.setCoordinate(i,j);
-                        enemies.add(enemy);
+                        enemies.add((Enemy) enemy);
                     }
                     j++;
                 }

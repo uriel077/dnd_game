@@ -49,7 +49,6 @@ public class GameManager {
         tickCount=0;
         while(!gameBoard.player.isDead()&&gameBoard.enemies.size()!=0)
         {
-
             UI.printLevel(message);
             message.clear();
             tickCount+=1;
@@ -103,7 +102,13 @@ public class GameManager {
         List<String> msg=new ArrayList<String>();
         while(iter.hasNext()){
                if(!gameBoard.player.isDead()) {
-                   msg = iter.next().turn(tickCount);
+                   Unit unit= iter.next();
+                   if(unit.isDead()){
+                       iter.remove();
+                    continue;
+                   }
+
+                   msg = unit.turn(tickCount);
                    if (msg != null)
                        messages.addAll(msg);
                }
@@ -126,7 +131,7 @@ public class GameManager {
 
     }
     public void removeTurn(Enemy e){
-        listTurn.remove(e);
+//        listTurn.remove(e);
        gameBoard.enemies.remove(e);
 
     }

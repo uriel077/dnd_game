@@ -63,7 +63,7 @@ public class Player extends Unit {
     public List<String> attack(Enemy defender){
         List<String> message=super.attack(defender);
         if(defender.isDead()){
-            message.add(defender.getName()+" died. "+this.getName()+defender.experienceValue);
+            message.add(defender.getName()+" died. "+this.getName()+" gained "+defender.experienceValue+" experience");
             gainXp(defender.experienceValue);
         }
         return message;
@@ -79,7 +79,6 @@ public class Player extends Unit {
             return Arrays.asList(new String[]{this.getName()+" tried to cast "+this.abilityName+", but there was not enough energy: "+resource+"/"+cost});
     }
     public List<String> tryCastAbility(){
-
         return null;
         }
 
@@ -87,7 +86,7 @@ public class Player extends Unit {
     public void move(Coordinate moveTo) {
 
     }
-
+@Override
     public List<String> turn(int turnCount){
         messageContainer=new ArrayList<String>();
         UserInput input=InputHandler.inputPlayerGame();

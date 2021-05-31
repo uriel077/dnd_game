@@ -11,9 +11,9 @@ import java.util.List;
 
 public class TargetHandler {
     public static GameBoard gameBoard;
-    public static List<Unit> candidateTarget(Player player, Coordinate cord, int range){
-        List<Unit> closeEnemy=new ArrayList<>();
-        for (Unit enemy:gameBoard.enemies)
+    public static List<Enemy> candidateTarget(Player player, Coordinate cord, int range){
+        List<Enemy> closeEnemy=new ArrayList<>();
+        for (Enemy enemy:gameBoard.enemies)
         { if( cord.isInRange(enemy.getCoordinate(),range))
 
              closeEnemy.add(enemy);
@@ -21,17 +21,17 @@ public class TargetHandler {
        return closeEnemy;
     }
 
-    public static List<Unit> candidateTarget(Enemy enemy, Coordinate cord, int range){
-        List<Unit> closePlayer=new ArrayList<>();
+    public static List<Player> candidateTarget(Enemy enemy, Coordinate cord, int range){
+        List<Player> closePlayer=new ArrayList<>();
          if( cord.isInRange(gameBoard.player.getCoordinate(),range))
              closePlayer.add(gameBoard.player);
         return closePlayer;
     }
-    public static List<Unit> candidateTarget(Enemy enemy, int range){
+    public static List<Player> candidateTarget(Enemy enemy, int range){
 
         return candidateTarget(enemy,enemy.getCoordinate(),range);
     }
-    public static List<Unit> candidateTarget(Player player, int range){
+    public static List<Enemy> candidateTarget(Player player, int range){
 
         return candidateTarget(player,player.getCoordinate(),range);
     }

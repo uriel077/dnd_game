@@ -3,6 +3,7 @@ package unit.enemy;
 import enums.UserInput;
 import handlers.TargetHandler;
 import unit.Unit;
+import unit.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Monster extends Enemy {
     }
     @Override
     public List<String> turn(int tick) {
-        List<Unit> closePlayer=new ArrayList<>();
+        List<Player> closePlayer=new ArrayList<>();
         closePlayer= TargetHandler.candidateTarget(this,visionRange);
         if(closePlayer.size()>0){
         int dx=this.getCoordinate().x-closePlayer.get(0).getCoordinate().x;

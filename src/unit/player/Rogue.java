@@ -2,6 +2,7 @@ package unit.player;
 
 import handlers.TargetHandler;
 import unit.Unit;
+import unit.enemy.Enemy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ public class Rogue extends Player{
 
     @Override
     public List<String> castAbility(){
-        List<Unit> potenTarget= TargetHandler.candidateTarget(this,this.getCoordinate(),this.abilityRange);
+        List<Enemy> potenTarget= TargetHandler.candidateTarget(this,this.getCoordinate(),this.abilityRange);
         List<String> message=new ArrayList<String>();
        message.add(this.getName()+" cast "+this.abilityName);
-        for(Unit target:potenTarget){
+        for(Enemy target:potenTarget){
             message.addAll(this.attack(target));
         }
         this.currentEnergy-=cost;
