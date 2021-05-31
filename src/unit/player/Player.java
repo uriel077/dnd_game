@@ -109,6 +109,7 @@ public class Player extends Unit {
     public void setHealth(int ha, int hp){
       super.setHealth(ha,hp);
         if (this.isDead()){
+            this.setTile('X');
             gameManager.removeTurn(this);
         }
     }
