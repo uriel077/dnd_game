@@ -42,7 +42,7 @@ public abstract class Unit {
         msg.add(getName() + " rolled " + ar + " attack points.");
         int [] combatInfo = defender.defence(ar);
         msg.add(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
-        msg.add(getName() + " dealt " + combatInfo[1] + " damage to" + defender + ".");
+        msg.add(getName() + " dealt " + combatInfo[1] + " damage to " + defender.getName() + ".");
         return msg;
     }
 

@@ -9,8 +9,8 @@ import java.io.File;
 import java.util.*;
 
 public class GameBoard {
-    private int length;
-    private int width;
+    public int length;
+    public int width;
     public Player player;
     public List<Enemy> enemies= new ArrayList<Enemy>();
     private HashMap<Coordinate, Wall> walls = new HashMap<Coordinate, Wall>();
