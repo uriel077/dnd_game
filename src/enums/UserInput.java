@@ -26,5 +26,13 @@ public enum UserInput {
         }
         return regex;
     }
+    public static UserInput findByKey(String key){
+        for(UserInput v : values()){
+            if( v.key.equals(key)){
+                return v;
+            }
+        }
+        return null;
+    }
 
 }

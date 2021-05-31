@@ -2,6 +2,7 @@ package game;
 
 import unit.Unit;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +12,10 @@ public class UI {
     public static void printLevel(List<String> msgs){
         for(String msg : msgs)
             print(msg);
-     //   if(gameBoard.enemies.size()>=0) {
+        if(gameBoard.enemies.size()>0) {
         print(gameBoard.toString());
-            //   print(gameBoard.player.description());
-        //}
+               print(gameBoard.player.description());
+        }
     }
     public static void printLevel(String msg){
         print(msg);
@@ -29,7 +30,7 @@ public class UI {
     }
         public static void printChoosenPlayer(){
         print("You have selected:");
-            //print(gameBoard.players.description());
+            print(gameBoard.player.getName());
     }
 
 }
