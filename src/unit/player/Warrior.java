@@ -22,6 +22,8 @@ public class Warrior extends Player {
     public Warrior(String name, char tile, int health, int attack, int defence, int cooldown) {
         super(name, tile, health, attack, defence);
         this.abilityCooldown = cooldown;
+        this.abilityName=ABILITY_NAME;
+        this.abilityRange=ABILITY_RANGE;
     }
 
     @Override
@@ -29,14 +31,14 @@ public class Warrior extends Player {
         List<Enemy> potenTarget = TargetHandler.candidateTarget(this, this.getCoordinate(), this.abilityRange);
         List<String> message = new ArrayList<String>();
         int healBuff=10* getDefencePoints();
-        message.add(this.getName() + " cast " + this.abilityName+", healing for "+healBuff+".");
+        messageContainer.add(this.getName() + " cast " + this.abilityName+", healing for "+healBuff+".");
         this.setCurrentHealth(getCurrentHealth() + healBuff);
-
         if(potenTarget.size()>0) {
             int random = new Random().nextInt(potenTarget.size());
-            message.addAll(this.attack(potenTarget.get(random)));
+            this.attack(potenTarget.get(random));
         }
-          return message;
+        this.remainingCooldown=this.abilityCooldown+1;
+          return messageContainer;
     }
 
     @Override
@@ -48,7 +50,6 @@ public class Warrior extends Player {
         this.setDefencePoints(this.getDefencePoints()+playerLevel);
 
     }
-
     @Override
     public List<String> turn(int turnCount) {
         List<String> messages=super.turn(turnCount);
@@ -57,7 +58,7 @@ public class Warrior extends Player {
     }
     @Override
     public String description() {
-        return super.description()+"\tCooldown: "+remainingCooldown+"/"+abilityCooldown;
+        return super.description()+"\t\tCooldown: "+remainingCooldown+"/"+abilityCooldown;
     }
     @Override
     public Warrior copy()
@@ -66,10 +67,9 @@ public class Warrior extends Player {
     }
     @Override
     public List<String> tryCastAbility(){
-        List<String> messages=super.tryCastAbility(abilityCooldown,remainingCooldown);
+        List<String> messages=super.tryCastAbility(abilityCooldown-remainingCooldown,abilityCooldown);
         if(messages.size()==0)
             messages.add(this.getName()+" tried to cast "+this.abilityName+", but there is a cooldown : "+remainingCooldown);
         return messages;
-
     }
 }

@@ -25,14 +25,14 @@ public class Rogue extends Player{
     @Override
     public List<String> castAbility(){
         List<Enemy> potenTarget= TargetHandler.candidateTarget(this,this.getCoordinate(),this.abilityRange);
-        List<String> message=new ArrayList<String>();
-       message.add(this.getName()+" cast "+this.abilityName);
+        messageContainer.add(this.getName()+" cast "+this.abilityName);
         for(Enemy target:potenTarget){
-            message.addAll(this.attack(target));
+            this.attack(target);
         }
         this.currentEnergy-=cost;
-        return message;
+        return messageContainer;
     }
+
     @Override
     public List<String> tryCastAbility(){
         List<String> messages=super.tryCastAbility(currentEnergy,cost);
@@ -54,7 +54,7 @@ public class Rogue extends Player{
     }
     @Override
     public String description() {
-        return super.description()+"\tEnergy: "+currentEnergy+"/"+MAX_ENERGY;
+        return super.description()+"\t\tEnergy: "+currentEnergy+"/"+MAX_ENERGY;
     }
 
     @Override

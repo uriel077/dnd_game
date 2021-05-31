@@ -39,4 +39,8 @@ public class Enemy extends Unit {
             gameManager.removeTurn(this);
         }
     }
+    @Override
+    public String description() {
+        return super.description()+"\t\tExperience Value: "+experienceValue;
+    }
 }

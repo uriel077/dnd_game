@@ -64,7 +64,7 @@ public abstract class Unit {
     public abstract List<String> turn(int tick);
 
 
-
+    @Override
     public String toString() {
         return tile+"";
     }
@@ -74,8 +74,8 @@ public abstract class Unit {
     }
 
     public String description(){
-        return getName() + "\t" + "Health: " + getCurrentHealth() + "/" + getHealth().healthPool + "\t" +
-                "Attack: " + getAttackPoints() + "\t" + "Defence: " + getDefencePoints();
+        return getName() + "\t\t" + "Health: " + getCurrentHealth() + "/" + getHealth().healthPool + "\t\t" +
+                "Attack: " + getAttackPoints() + "\t\t" + "Defence: " + getDefencePoints();
     }
 
     public int getAttackPoints() {

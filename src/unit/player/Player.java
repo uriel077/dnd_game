@@ -18,7 +18,7 @@ public class Player extends Unit {
     public String abilityName="";
     public int abilityRange=0;
     private int LEVEL_SIZE=50;
-    private List<String> messageContainer=new ArrayList<>();
+    public List<String> messageContainer=new ArrayList<>();
     public Player(String name, char tile, int health, int attack, int defence) {
         super( name, tile, health, attack, defence);
 
@@ -30,7 +30,7 @@ public class Player extends Unit {
 
     @Override
     public String description() {
-        return super.description()+"\tLevel: "+playerLevel+"\tExperience:"+getExperience()+"/"+LEVEL_SIZE*playerLevel;
+        return super.description()+"\t\tLevel: "+playerLevel+"\t\tExperience:"+getExperience()+"/"+LEVEL_SIZE*playerLevel;
     }
 
     public int getExperience() {
@@ -73,10 +73,9 @@ public class Player extends Unit {
     }
 
     public List<String> tryCastAbility(int resource, int cost){
-        List<String> messages=new ArrayList<>();
         if(resource-cost>=0)
-            messages.addAll( castAbility());
-        return messages;
+             castAbility();
+        return messageContainer;
     }
     public List<String> tryCastAbility(){
         return null;
@@ -92,7 +91,6 @@ public class Player extends Unit {
         UserInput input=InputHandler.inputPlayerGame();
         if(input==UserInput.CastAbility)
             this.tryCastAbility();
-
        // else
             //return MoveHandler(this,input);
         return messageContainer;
