@@ -61,12 +61,12 @@ public class Player extends Unit {
 
 
     public List<String> attack(Enemy defender){
-        List<String> message=super.attack(defender);
+       messageContainer.addAll(super.attack(defender));
         if(defender.isDead()){
-            message.add(defender.getName()+" died. "+this.getName()+" gained "+defender.experienceValue+" experience");
+            messageContainer.add(defender.getName()+" died. "+this.getName()+" gained "+defender.experienceValue+" experience");
             gainXp(defender.experienceValue);
         }
-        return message;
+        return messageContainer;
     }
     public void setAbilityName(String abilityName) {
         this.abilityName = abilityName;
@@ -91,7 +91,7 @@ public class Player extends Unit {
         messageContainer=new ArrayList<String>();
         UserInput input=InputHandler.inputPlayerGame();
         if(input==UserInput.CastAbility)
-           messageContainer.addAll( this.tryCastAbility());
+            this.tryCastAbility();
 
        // else
             //return MoveHandler(this,input);
