@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GameBoard {
-    private int length;
-    private int width;
+    public int length;
+    public int width;
     public Player player;
     public List<Unit> enemies;
     private HashMap<Coordinate, Wall> walls = new HashMap<Coordinate, Wall>();
