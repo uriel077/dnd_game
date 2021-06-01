@@ -100,21 +100,15 @@ public class GameManager {
         messages=new ArrayList<String>();
         ListIterator<Unit> iter = listTurn.listIterator();
         List<String> msg=new ArrayList<String>();
-        while(iter.hasNext()){
-               if(!gameBoard.player.isDead()) {
+        while(iter.hasNext()&&!gameBoard.player.isDead()){
                    Unit unit= iter.next();
                    if(unit.isDead()){
                        iter.remove();
                     continue;
                    }
-
                    msg = unit.turn(tickCount);
                    if (msg != null)
                        messages.addAll(msg);
-               }
-            else{
-             break;
-             }
         }
         return messages;
     }
