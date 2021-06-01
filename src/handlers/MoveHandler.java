@@ -13,7 +13,7 @@ import java.util.List;
 public class MoveHandler {
     public static GameBoard gameBoard;
 
-    public void move(UserInput input, Player player){
+    public static void move(UserInput input, Player player){
         Coordinate moveTo = joyStick(input, player.getCoordinate());
         Enemy target = targetCondidate(moveTo, player);
         if (target == null){
@@ -29,7 +29,7 @@ public class MoveHandler {
 
     }
 
-    public void move(UserInput input, Enemy enemy){
+    public static void move(UserInput input, Enemy enemy){
         Coordinate moveTo = joyStick(input, enemy.getCoordinate());
         Player target = targetCondidate(moveTo, enemy);
         if (target == null){
@@ -45,37 +45,37 @@ public class MoveHandler {
 
     }
 
-    public void combat(Unit unit1, Unit unit2){
+    public static void combat(Unit unit1, Unit unit2){
         UI.print(unit1.getName() + " engaged in combat with " + unit2.getName());
         UI.print(unit1.description());
         UI.print(unit2.description());
 
     }
 
-    private Coordinate joyStick(UserInput input, Coordinate pos) {
+    private static Coordinate joyStick(UserInput input, Coordinate pos) {
         Coordinate newPos = pos.copy();
         switch (input) {
             case Right -> newPos.x++;
             case Left -> newPos.x--;
-            case Up -> newPos.y++;
-            case Down -> newPos.y--;
+            case Up -> newPos.y--;
+            case Down -> newPos.y++;
         }
-        if (isValidMove(newPos))
+        if (!isValidMove(newPos))
              newPos = pos.copy();
         return newPos;
     }
-    private boolean isValidMove(Coordinate newPos){
-        return (newPos.x>= 0 && newPos.x<= gameBoard.width && newPos.y>= 0 && newPos.y<= gameBoard.length &&
+    private static boolean isValidMove(Coordinate newPos){
+        return (newPos.x>= 0 && newPos.x<= gameBoard.width && newPos.y>= 0 && newPos.y<= gameBoard.height &&
                 !gameBoard.walls.containsKey(newPos) );
     }
 
-    private Enemy targetCondidate(Coordinate newPos, Player player){
-        List<Enemy> targets = TargetHandler.candidateTarget(player, 0);
+    private static Enemy targetCondidate(Coordinate newPos, Player player){
+        List<Enemy> targets = TargetHandler.candidateTarget(player,newPos, 0);
         return targets.size() == 0 ? null: targets.get(0);
     }
 
-    private Player targetCondidate(Coordinate newPos, Enemy enemy){
-        List<Player> targets = TargetHandler.candidateTarget(enemy, 0);
+    private static Player targetCondidate(Coordinate newPos, Enemy enemy){
+        List<Player> targets = TargetHandler.candidateTarget(enemy,newPos, 0);
         return targets.size() == 0 ? null: targets.get(0);
     }
 }

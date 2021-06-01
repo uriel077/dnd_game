@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.*;
 
 public class GameBoard {
-    public int length;
+    public int height;
     public int width;
     public Player player;
     public List<Enemy> enemies= new ArrayList<Enemy>();
@@ -23,46 +23,47 @@ public class GameBoard {
         walls.clear();
         try {
             Scanner mapReader = new Scanner(mapFile);
-            int i = 0, j=0;
+            int y = 0, x=0;
             Coordinate Pos = new Coordinate();
             Unit enemy;
             String data;
             while (mapReader.hasNextLine()){
                 data = mapReader.nextLine();
 
-                j = 0;
+                x = 0;
                for (char ch: data.toCharArray()){
                     if (ch == '@') {
-                        player.setCoordinate(i, j);
+                        player.setCoordinate(x, y);
                         player.setTile('@');
                     }
                     if (ch == '#')
-                        Pos = new Coordinate(i,j);
+                        Pos = new Coordinate(x,y);
                         walls.put(Pos, new Wall(Pos));
                     if (DatabaseUnits.enemyPool.containsKey(ch+"")){
                         enemy = DatabaseUnits.enemyPool.get(ch+"").copy();
-                        enemy.setCoordinate(i,j);
+                        enemy.setCoordinate(x,y);
                         enemies.add((Enemy) enemy);
                     }
-                    j++;
+                    x++;
                 }
-                i++;
+                y++;
             }
-            this.width = j;
-            this.length = i;
-            this.board = new String[i][j];
+            this.width = x;
+            this.height = y;
+            this.board = new String[y][x];
         }
         catch (Exception e){}
     }
     public void buildArray(){
-        for (String[] row: board)
-            Arrays.fill(row, ".");
-        board[player.getCoordinate().x][player.getCoordinate().y] =player.toString();
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+                board[y][x] = ".";
+        board[player.getCoordinate().y][player.getCoordinate().x] =player.toString();
         for (Unit enemy : this.enemies){
-            board[enemy.getCoordinate().x][enemy.getCoordinate().y] = enemy.toString();
+            board[enemy.getCoordinate().y][enemy.getCoordinate().x] = enemy.toString();
         }
         for (Coordinate wallPos: this.walls.keySet()){
-            board[wallPos.x][wallPos.y] = this.walls.get(wallPos).toString();
+            board[wallPos.y][wallPos.x] = this.walls.get(wallPos).toString();
         }
     }
 

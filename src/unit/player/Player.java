@@ -3,6 +3,7 @@ package unit.player;
 import enums.UserInput;
 import game.Health;
 import handlers.InputHandler;
+import handlers.MoveHandler;
 import unit.Unit;
 import unit.enemy.Enemy;
 
@@ -83,6 +84,7 @@ public class Player extends Unit {
     @Override
 
     public void move(UserInput moveDir) {
+        MoveHandler.move(moveDir, this);
 
     }
 @Override
@@ -91,8 +93,8 @@ public class Player extends Unit {
         UserInput input=InputHandler.inputPlayerGame();
         if(input==UserInput.CastAbility)
             this.tryCastAbility();
-       // else
-            //return MoveHandler(this,input);
+        else
+            move(input);
         return messageContainer;
     }
     public  List<String> castAbility(){
