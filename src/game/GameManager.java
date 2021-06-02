@@ -103,7 +103,6 @@ public class GameManager {
                     continue;
                    }
                   unit.turn(tickCount);
-
         }
     }
 

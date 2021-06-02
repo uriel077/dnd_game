@@ -50,7 +50,7 @@ public class Player extends Unit {
 
     public void setExperience(int experience) {
         this.experience = experience;
-        while (experience>=LEVEL_SIZE*playerLevel) {
+        while (this.experience>=LEVEL_SIZE*playerLevel) {
             int[] saveState=new int[]{this.getHealth().healthPool,this.getAttackPoints(),this.getDefencePoints()};
             levelUp();
             UI.print(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");

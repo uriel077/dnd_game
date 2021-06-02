@@ -20,9 +20,6 @@ public class MoveHandler {
             player.setCoordinate(moveTo);
         }
         else {
-//            UI.print(player.getName() + " engaged in combat with " + target.getName());
-//            UI.print(player.description());
-//            UI.print(target.description());
             combat(player, target);
             player.attack(target);
         }
@@ -36,9 +33,6 @@ public class MoveHandler {
             enemy.setCoordinate(moveTo);
         }
         else {
-//            UI.print(enemy.getName() + " engaged in combat with " + target.getName());
-//            UI.print(enemy.description());
-//            UI.print(target.description());
             combat(enemy, target);
             enemy.attack(target);
         }
