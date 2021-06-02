@@ -4,7 +4,6 @@ import enums.UserInput;
 import handlers.TargetHandler;
 import unit.Unit;
 import unit.player.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -48,6 +47,7 @@ public class Monster extends Enemy {
         return new Monster(this.getName(), this.toString().charAt(0), this.getCurrentHealth(), this.getAttackPoints(), this.getDefencePoints()
                 ,this.experienceValue,this.visionRange);
     }
+    @Override
     public String description() {
         return super.description()+"\t\tVision Range: "+this.visionRange;
     }
