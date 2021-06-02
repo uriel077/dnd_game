@@ -17,4 +17,5 @@ public class Trap extends Enemy {
         this(name, tile, hp, ap, dp,xp,visibilityTime,invisibilityTime, new Coordinate());
 
     }
+
 }

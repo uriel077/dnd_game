@@ -20,6 +20,7 @@ public abstract class Unit {
     private Random rnd = new Random();
     public static GameManager gameManager;
 
+    public Unit(){}
     public Unit(String name, char tile, Health hp, int ap, int dp, Coordinate pos){
         this.name = name;
         this.health = hp;
