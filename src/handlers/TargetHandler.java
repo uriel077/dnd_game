@@ -22,11 +22,12 @@ public class TargetHandler {
     }
 
     public static List<Player> candidateTarget(Enemy enemy, Coordinate cord, int range){
-        List<Player> closePlayer=new ArrayList<>();
+            List<Player> closePlayer=new ArrayList<>();
          if( cord.isInRange(gameBoard.player.getCoordinate(),range))
              closePlayer.add(gameBoard.player);
         return closePlayer;
     }
+
     public static List<Player> candidateTarget(Enemy enemy, int range){
 
         return candidateTarget(enemy,enemy.getCoordinate(),range);
