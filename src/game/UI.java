@@ -9,9 +9,7 @@ import java.util.Map;
 public class UI {
     public static GameBoard gameBoard;
 
-    public static void printLevel(List<String> msgs){
-        for(String msg : msgs)
-            print(msg);
+    public static void printLevel(){
         if(gameBoard.enemies.size()>0) {
         print(gameBoard.toString());
                print(gameBoard.player.description());
