@@ -20,6 +20,7 @@ public class Player extends Unit {
     public int abilityRange=0;
     private int LEVEL_SIZE=50;
 
+    public Player(){}
     public Player(String name, char tile, int health, int attack, int defence) {
         super( name, tile, health, attack, defence);
 

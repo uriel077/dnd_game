@@ -28,6 +28,7 @@ public class TargetHandler {
         return closePlayer;
     }
 
+
     public static List<Player> candidateTarget(Enemy enemy, int range){
 
         return candidateTarget(enemy,enemy.getCoordinate(),range);
@@ -35,6 +36,13 @@ public class TargetHandler {
     public static List<Enemy> candidateTarget(Player player, int range){
 
         return candidateTarget(player,player.getCoordinate(),range);
+    }
+
+    public static List<Unit> candidateTarget(Coordinate cord, int range){
+        List<Unit> closeUnit=new ArrayList<>();
+        closeUnit.addAll(candidateTarget(new Enemy(),cord,range));
+        closeUnit.addAll(candidateTarget(new Player(),cord,range));
+        return closeUnit;
     }
 
 
