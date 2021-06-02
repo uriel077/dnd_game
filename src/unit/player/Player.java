@@ -2,6 +2,7 @@ package unit.player;
 
 import enums.UserInput;
 import game.Health;
+import game.UI;
 import handlers.InputHandler;
 import handlers.MoveHandler;
 import unit.Unit;
@@ -18,7 +19,7 @@ public class Player extends Unit {
     public String abilityName="";
     public int abilityRange=0;
     private int LEVEL_SIZE=50;
-    public List<String> messageContainer=new ArrayList<>();
+
     public Player(String name, char tile, int health, int attack, int defence) {
         super( name, tile, health, attack, defence);
 
@@ -51,7 +52,7 @@ public class Player extends Unit {
         while (experience>=LEVEL_SIZE*playerLevel) {
             int[] saveState=new int[]{this.getHealth().healthPool,this.getAttackPoints(),this.getDefencePoints()};
             levelUp();
-            this.messageContainer.add(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");
+            UI.print(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");
         }
     }
     private void gainXp(int xp){
@@ -60,25 +61,28 @@ public class Player extends Unit {
     }
 
 
-    public List<String> attack(Enemy defender){
-       messageContainer.addAll(super.attack(defender));
+    public void attack(Enemy defender){
+       super.attack(defender);
         if(defender.isDead()){
-            messageContainer.add(defender.getName()+" died. "+this.getName()+" gained "+defender.experienceValue+" experience");
+            UI.print(defender.getName()+" died. "+this.getName()+" gained "+defender.experienceValue+" experience");
             gainXp(defender.experienceValue);
         }
-        return messageContainer;
+
     }
     public void setAbilityName(String abilityName) {
         this.abilityName = abilityName;
     }
 
-    public List<String> tryCastAbility(int resource, int cost){
-        if(resource-cost>=0)
+    public Boolean tryCastAbility(int resource, int cost){
+        if(resource-cost>=0){
              castAbility();
-        return messageContainer;
+             return true;
+        }
+        return false;
+
     }
-    public List<String> tryCastAbility(){
-        return null;
+    public void tryCastAbility(){
+
         }
 
     @Override
@@ -88,17 +92,15 @@ public class Player extends Unit {
 
     }
 @Override
-    public List<String> turn(int turnCount){
-        messageContainer=new ArrayList<String>();
+    public void turn(int turnCount){
         UserInput input=InputHandler.inputPlayerGame();
         if(input==UserInput.CastAbility)
             this.tryCastAbility();
         else
             move(input);
-        return messageContainer;
     }
-    public  List<String> castAbility(){
-        return null;
+    public  void castAbility(){
+
     }
 
     public Player copy()

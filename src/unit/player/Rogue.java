@@ -1,5 +1,6 @@
 package unit.player;
 
+import game.UI;
 import handlers.TargetHandler;
 import unit.Unit;
 import unit.enemy.Enemy;
@@ -23,22 +24,22 @@ public class Rogue extends Player{
     }
 
     @Override
-    public List<String> castAbility(){
+    public void castAbility(){
         List<Enemy> potenTarget= TargetHandler.candidateTarget(this,this.getCoordinate(),this.abilityRange);
-        messageContainer.add(this.getName()+" cast "+this.abilityName);
+        UI.print(this.getName()+" cast "+this.abilityName);
         for(Enemy target:potenTarget){
             this.attack(target);
         }
         this.currentEnergy-=cost;
-        return messageContainer;
+
     }
 
     @Override
-    public List<String> tryCastAbility(){
-        List<String> messages=super.tryCastAbility(currentEnergy,cost);
-        if(messages.size()==0)
-            messages.add(this.getName()+" tried to cast "+this.abilityName+", but there was not enough energy: "+currentEnergy+"/"+cost);
-        return messages;
+    public void tryCastAbility(){
+        boolean cast=super.tryCastAbility(currentEnergy,cost);
+        if(!cast)
+            UI.print(this.getName()+" tried to cast "+this.abilityName+", but there was not enough energy: "+currentEnergy+"/"+cost);
+
     }
     @Override
     public void levelUp(){
@@ -47,10 +48,10 @@ public class Rogue extends Player{
         this.setAttackPoints(this.getAttackPoints()+this.playerLevel*3);
     }
     @Override
-    public List<String> turn(int turnCount){
-        List<String> messages=super.turn(turnCount);
+    public void turn(int turnCount){
+        super.turn(turnCount);
         currentEnergy=Math.min(MAX_ENERGY,currentEnergy+10);
-        return messages;
+
     }
     @Override
     public String description() {

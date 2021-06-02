@@ -49,15 +49,13 @@ public class GameManager {
         tickCount=0;
         while(!gameBoard.player.isDead()&&gameBoard.enemies.size()!=0)
         {
-            UI.printLevel(message);
+            UI.printLevel();
             message.clear();
             tickCount+=1;
-            msg=onTick();
-            if(msg!=null)
-                message.addAll(msg);
+          onTick();
         }if(gameBoard.player.isDead())
             message.add("You Lost");
-        UI.printLevel(message);
+        UI.printLevel();
     }
 
     /**
@@ -96,21 +94,17 @@ public class GameManager {
             listTurn.add(enemy);
         }
     }
-    public List<String> onTick(){
-        messages=new ArrayList<String>();
+    public void onTick(){
         ListIterator<Unit> iter = listTurn.listIterator();
-        List<String> msg=new ArrayList<String>();
         while(iter.hasNext()&&!gameBoard.player.isDead()){
                    Unit unit= iter.next();
                    if(unit.isDead()){
                        iter.remove();
                     continue;
                    }
-                   msg = unit.turn(tickCount);
-                   if (msg != null)
-                       messages.addAll(msg);
+                  unit.turn(tickCount);
+
         }
-        return messages;
     }
 
     public int getTickCount() {

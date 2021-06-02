@@ -27,18 +27,18 @@ public class Warrior extends Player {
     }
 
     @Override
-    public List<String> castAbility() {
+    public void castAbility() {
         List<Enemy> potenTarget = TargetHandler.candidateTarget(this, this.getCoordinate(), this.abilityRange);
         List<String> message = new ArrayList<String>();
         int healBuff=10* getDefencePoints();
-        messageContainer.add(this.getName() + " cast " + this.abilityName+", healing for "+healBuff+".");
+        UI.print(this.getName() + " cast " + this.abilityName+", healing for "+healBuff+".");
         this.setCurrentHealth(getCurrentHealth() + healBuff);
         if(potenTarget.size()>0) {
             int random = new Random().nextInt(potenTarget.size());
             this.attack(potenTarget.get(random));
         }
         this.remainingCooldown=this.abilityCooldown+1;
-          return messageContainer;
+
     }
 
     @Override
@@ -51,10 +51,10 @@ public class Warrior extends Player {
 
     }
     @Override
-    public List<String> turn(int turnCount) {
-        List<String> messages=super.turn(turnCount);
+    public void turn(int turnCount) {
+        super.turn(turnCount);
         remainingCooldown=Math.max(remainingCooldown-1,0);
-        return messages;
+
     }
     @Override
     public String description() {
@@ -66,10 +66,10 @@ public class Warrior extends Player {
         return new Warrior(this.getName(),this.toString().charAt(0),this.getCurrentHealth(),this.getAttackPoints(),this.getDefencePoints(),this.abilityCooldown);
     }
     @Override
-    public List<String> tryCastAbility(){
-        List<String> messages=super.tryCastAbility(abilityCooldown-remainingCooldown,abilityCooldown);
-        if(messages.size()==0)
-            messages.add(this.getName()+" tried to cast "+this.abilityName+", but there is a cooldown : "+remainingCooldown);
-        return messages;
+    public void tryCastAbility(){
+        boolean cast=super.tryCastAbility(abilityCooldown-remainingCooldown,abilityCooldown);
+        if(!cast)
+            UI.print(this.getName()+" tried to cast "+this.abilityName+", but there is a cooldown : "+remainingCooldown);
+
     }
 }

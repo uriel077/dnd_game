@@ -18,31 +18,31 @@ public class Monster extends Enemy {
         this.visionRange=visionRange;
     }
     @Override
-    public List<String> turn(int tick) {
+    public void turn(int turnCount) {
+        super.turn(turnCount);
         List<Player> closePlayer=new ArrayList<>();
         closePlayer= TargetHandler.candidateTarget(this,visionRange);
         if(closePlayer.size()>0){
         int dx=this.getCoordinate().x-closePlayer.get(0).getCoordinate().x;
         int dy=this.getCoordinate().y-closePlayer.get(0).getCoordinate().y;
-//        if(Math.abs(dx)>Math.abs(dy)) {
-//            if (dx > 0)
-//                return this.move(UserInput.Left);
-//            else
-//                return this.move(UserInput.Right);
-//        }else{
-//            if (dy > 0)
-//                return this.move(UserInput.Up);
-//            else
-//                return this.move(UserInput.Down);
-//        }
+        if(Math.abs(dx)>Math.abs(dy)) {
+            if (dx > 0)
+                this.move(UserInput.Left);
+            else
+                this.move(UserInput.Right);
+        }else{
+            if (dy > 0)
+                this.move(UserInput.Up);
+            else
+                this.move(UserInput.Down);
+        }
         }
         else
         {
-
-           //return this.move(rndArrs[(new Random().nextInt(6))]) ;
+          this.move(rndArrs[(new Random().nextInt(4))]) ;
         }
-        return null;
     }
+
     @Override
     public Unit copy() {
         return new Monster(this.getName(), this.toString().charAt(0), this.getCurrentHealth(), this.getAttackPoints(), this.getDefencePoints()
@@ -51,4 +51,5 @@ public class Monster extends Enemy {
     public String description() {
         return super.description()+"\t\tVision Range: "+this.visionRange;
     }
+
 }

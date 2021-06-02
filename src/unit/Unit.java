@@ -41,18 +41,16 @@ public abstract class Unit {
 
     public abstract Unit copy();
 
-    public List<String> attack(Unit defender){
-        return this.attack(defender,this.getAttackPoints());
+    public void attack(Unit defender){
+        this.attack(defender,this.getAttackPoints());
     }
 
-    public List<String> attack(Unit defender,int ap){
-        List<String> msg = new ArrayList<String>();
+    public void  attack(Unit defender,int ap){
         int ar = rnd.nextInt(ap + 1);
-        msg.add(getName() + " rolled " + ar + " attack points.");
+        UI.print(getName() + " rolled " + ar + " attack points.");
         int [] combatInfo = defender.defence(ar);
-        msg.add(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
-        msg.add(getName() + " dealt " + combatInfo[1] + " damage to " + defender.getName() + ".");
-        return msg;
+        UI.print(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
+        UI.print(getName() + " dealt " + combatInfo[1] + " damage to " + defender.getName() + ".");
     }
 
     public int[] defence(int ar){
@@ -66,7 +64,7 @@ public abstract class Unit {
 
     public abstract void move(UserInput moveDir);
 
-    public abstract List<String> turn(int tick);
+    public abstract void turn(int tick);
 
 
     @Override
