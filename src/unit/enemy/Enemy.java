@@ -9,9 +9,13 @@ import java.util.List;
 public class Enemy extends Unit {
     public int experienceValue=0;
     public Enemy(String name, char tile, int hp, int ap, int dp, Coordinate pos) {
-        super(name, tile, hp, ap, dp);
+        super(name, tile, hp, ap, dp,pos);
     }
     public Enemy(String name, char tile, int hp, int ap, int dp,int xp) {
+        this(name, tile, hp, ap, dp,new Coordinate());
+
+    }
+    public Enemy(String name, char tile, int hp, int ap, int dp,int xp,Coordinate pos) {
         super(name, tile, hp, ap, dp);
         this.experienceValue=xp;
     }

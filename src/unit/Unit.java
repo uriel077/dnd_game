@@ -34,6 +34,10 @@ public abstract class Unit {
         this( name,  tile,  new Health(hp,hp),  ap,  dp, new Coordinate());
     }
 
+    public Unit(String name, char tile, int hp, int ap, int dp,Coordinate pos){
+        this( name,  tile,  new Health(hp,hp),  ap,  dp, pos);
+    }
+
 
     public abstract Unit copy();
 
