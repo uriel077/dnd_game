@@ -60,9 +60,14 @@ public class Player extends Unit {
 
         setExperience(getExperience()+xp);
     }
+    public void castAbility(Unit defender,int ap){
+        int [] combatInfo = defender.defence(ap);
+        UI.print(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
+        UI.print(getName() + " hit " + defender.getName() + " for " + combatInfo[1] + "ability damage.");
+    }
 
 
-    public void attack(Enemy defender){
+    public void attack(Enemy defender ){
        super.attack(defender);
         if(defender.isDead()){
             UI.print(defender.getName()+" died. "+this.getName()+" gained "+defender.experienceValue+" experience");

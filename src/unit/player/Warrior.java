@@ -35,7 +35,7 @@ public class Warrior extends Player {
         this.setCurrentHealth(getCurrentHealth() + healBuff);
         if(potenTarget.size()>0) {
             int random = new Random().nextInt(potenTarget.size());
-            this.attack(potenTarget.get(random));
+            this.castAbility(potenTarget.get(random),(int) (this.getCurrentHealth()*0.1));
         }
         this.remainingCooldown=this.abilityCooldown+1;
 

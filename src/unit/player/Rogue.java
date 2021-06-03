@@ -28,7 +28,7 @@ public class Rogue extends Player{
         List<Enemy> potenTarget= TargetHandler.candidateTarget(this,this.getCoordinate(),this.abilityRange);
         UI.print(this.getName()+" cast "+this.abilityName);
         for(Enemy target:potenTarget){
-            this.attack(target);
+            this.castAbility(target,this.getAttackPoints());
         }
         this.currentEnergy-=cost;
 
