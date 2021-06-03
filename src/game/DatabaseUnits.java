@@ -4,6 +4,7 @@ package game;
 import unit.Unit;
 import unit.enemy.Monster;
 import unit.enemy.Trap;
+import unit.player.Hunter;
 import unit.player.Mage;
 import unit.player.Rogue;
 import unit.player.Warrior;
@@ -87,6 +88,10 @@ public class DatabaseUnits {
          int hitCount=Integer.parseInt(typeUnit.get(9));
          int range=Integer.parseInt(typeUnit.get(10));
          return new Mage(name,tile,health,attack,defence,manaPool,manaCost,spellPower,hitCount,range);
+      }
+      if(type.equals("Hunter")){
+         int range=Integer.parseInt(typeUnit.get(6));
+         return new Hunter(name,tile,health,attack,defence,range);
       }
       return null;
    }
