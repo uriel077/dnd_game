@@ -63,7 +63,7 @@ public class Player extends Unit {
     public void castAbility(Unit defender,int ap){
         int [] combatInfo = defender.defence(ap);
         UI.print(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
-        UI.print(getName() + " hit " + defender.getName() + " for " + combatInfo[1] + "ability damage.");
+        UI.print(getName() + " hit " + defender.getName() + " for " + combatInfo[1] + " ability damage.");
     }
 
 
