@@ -35,6 +35,17 @@ public class Mage extends Player{
         this.currentMana = Math.min(this.currentMana + this.manaPool/4, this.manaPool);
         this.spellPower += 10*playerLevel;
     }
+    @Override
+    public void setExperience(int experience) {
+        this.experience = experience;
+        while (this.experience>=50*playerLevel) {
+            int[] saveState=new int[]{this.getHealth().healthPool,this.getAttackPoints(),this.getDefencePoints(),this.getManaPool(), this.getSpellPower()};
+            levelUp();
+            UI.print(this.getName() + " reached level " + this.playerLevel + ": +"+
+                    (this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense, +"+
+                    (this.getManaPool() - saveState[3])+" maximum mana, +"+(this.getSpellPower() - saveState[4]) +" spell power");
+        }
+    }
 
     @Override
     public void turn(int tick){
@@ -70,5 +81,11 @@ public class Mage extends Player{
     public Mage copy(){
         return new Mage(this.getName(), this.toString().charAt(0),this.getCurrentHealth(), this.getAttackPoints()
                 ,this.getDefencePoints(),this.manaPool, this.manaCost, this.spellPower,this.hitCount,this.abilityRange);
+    }
+    public int getManaPool(){
+        return this.manaPool;
+    }
+    public int getSpellPower(){
+        return this.spellPower;
     }
 }

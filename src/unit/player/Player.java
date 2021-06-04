@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Player extends Unit {
 
-    private int experience=0;
+    public int experience=0;
     public int playerLevel =1;
     public String abilityName="";
     public int abilityRange=0;
