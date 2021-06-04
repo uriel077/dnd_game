@@ -56,14 +56,19 @@ public class Player extends Unit {
             UI.print(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");
         }
     }
+
     private void gainXp(int xp){
 
         setExperience(getExperience()+xp);
     }
-    public void castAbility(Unit defender,int ap){
+    public void castAbility(Enemy defender,int ap){
         int [] combatInfo = defender.defence(ap);
         UI.print(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
         UI.print(getName() + " hit " + defender.getName() + " for " + combatInfo[1] + " ability damage.");
+        if(defender.isDead()) {
+            UI.print(defender.getName() + " died. " + this.getName() + " gained " + defender.experienceValue + " experience");
+            gainXp(defender.experienceValue);
+        }
     }
 
 
