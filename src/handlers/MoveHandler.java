@@ -28,6 +28,8 @@ public class MoveHandler {
 
     public static void move(UserInput input, Enemy enemy){
         Coordinate moveTo = joyStick(input, enemy.getCoordinate());
+        if(isOnEnemy(moveTo))
+            return;
         Player target = targetCondidate(moveTo, enemy);
         if (target == null){
             enemy.setCoordinate(moveTo);
@@ -60,7 +62,7 @@ public class MoveHandler {
     }
     private static boolean isValidMove(Coordinate newPos){
         return (newPos.x>= 0 && newPos.x<= gameBoard.width && newPos.y>= 0 && newPos.y<= gameBoard.height &&
-                !gameBoard.walls.containsKey(newPos) && !isOnEnemy(newPos));
+                !gameBoard.walls.containsKey(newPos));
     }
 
     private static boolean isOnEnemy(Coordinate newPos){
