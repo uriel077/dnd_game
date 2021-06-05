@@ -6,6 +6,7 @@ import game.UI;
 import handlers.InputHandler;
 import handlers.MoveHandler;
 import unit.Unit;
+import unit.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Enemy extends Unit {
     public void turn(int turnCount){
 
     }
-    public void attack(Enemy defender){
+    public void attack(Player defender){
         super.attack(defender);
         if(defender.isDead()){
             UI.print(defender.getName()+" was killed by "+this.getName()+".");

@@ -2,6 +2,7 @@ package unit.player;
 
 import enums.UserInput;
 import game.Health;
+import game.HeroicUnit;
 import game.UI;
 import handlers.InputHandler;
 import handlers.MoveHandler;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Player extends Unit {
+public class Player extends Unit implements HeroicUnit {
 
     public int experience=0;
     public int playerLevel =1;

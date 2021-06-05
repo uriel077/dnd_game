@@ -1,5 +1,6 @@
 package unit.player;
 
+import game.HeroicUnit;
 import game.UI;
 import handlers.TargetHandler;
 import unit.enemy.Enemy;
@@ -7,7 +8,7 @@ import unit.enemy.Enemy;
 import java.util.List;
 import java.util.Random;
 
-public class Mage extends Player{
+public class Mage extends Player {
     private int manaPool;
     private int currentMana;
     private final int manaCost;
@@ -71,7 +72,7 @@ public class Mage extends Player{
     }
     @Override
     public void tryCastAbility(){
-        boolean cast = super.tryCastAbility(currentMana , manaCost);
+        boolean cast = this.tryCastAbility(currentMana , manaCost); //TODO: tried this.tryCast instead of super
         if (!cast){
             UI.print(this.getName()+" tried to cast "+this.abilityName+", but there was not enough mana: "+currentMana+"/"+manaCost);
         }

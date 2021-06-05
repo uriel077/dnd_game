@@ -1,5 +1,6 @@
 package unit.player;
 
+import game.HeroicUnit;
 import game.UI;
 import handlers.TargetHandler;
 import unit.Unit;
@@ -8,7 +9,7 @@ import unit.enemy.Enemy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rogue extends Player{
+public class Rogue extends Player {
     private int currentEnergy;
     private int cost;
     private final int MAX_ENERGY=100;

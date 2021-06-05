@@ -60,7 +60,16 @@ public class MoveHandler {
     }
     private static boolean isValidMove(Coordinate newPos){
         return (newPos.x>= 0 && newPos.x<= gameBoard.width && newPos.y>= 0 && newPos.y<= gameBoard.height &&
-                !gameBoard.walls.containsKey(newPos) );
+                !gameBoard.walls.containsKey(newPos) && gameBoard.player.getCoordinate() != newPos && !isOnEnemy(newPos));
+    }
+
+    private static boolean isOnEnemy(Coordinate newPos){
+        List<Enemy> enemies = gameBoard.enemies;
+        for (Enemy enemy:enemies){
+            if (enemy.getCoordinate() == newPos)
+                return true;
+        }
+        return false;
     }
 
     private static Enemy targetCondidate(Coordinate newPos, Player player){

@@ -2,6 +2,7 @@ package unit.player;
 
 import game.GameManager;
 import game.Coordinate;
+import game.HeroicUnit;
 import game.UI;
 import handlers.TargetHandler;
 import unit.Unit;
