@@ -72,7 +72,7 @@ public class Boss extends Enemy implements HeroicUnit {
         else
         {
             this.combatTicks = 0;
-            this.move(rndArrs[(new Random().nextInt(4))]) ;
+            this.move(rndArrs[(new Random().nextInt(5))]) ;
         }
     }
 
