@@ -2,6 +2,7 @@ package unit.player;
 
 import enums.UserInput;
 import game.Health;
+import game.HeroicUnit;
 import game.UI;
 import handlers.InputHandler;
 import handlers.MoveHandler;
@@ -12,9 +13,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Player extends Unit {
+public class Player extends Unit implements HeroicUnit {
 
-    private int experience=0;
+    public int experience=0;
     public int playerLevel =1;
     public String abilityName="";
     public int abilityRange=0;
@@ -26,7 +27,7 @@ public class Player extends Unit {
 
     }
     public Player(String name, char tile, Health health, int attack, int defence) {
-        super( name, tile, health.healthAmount, attack, defence);//TODO: check again the constructor
+        super( name, tile, health.healthAmount, attack, defence);
 
     }
 
@@ -56,14 +57,19 @@ public class Player extends Unit {
             UI.print(this.getName() + " reached level " + this.playerLevel + ": +"+(this.getHealth().healthPool-saveState[0])+" Health, +"+(this.getAttackPoints()-saveState[1])+" Attack, +"+(this.getDefencePoints()-saveState[2])+" Defense");
         }
     }
+
     private void gainXp(int xp){
 
         setExperience(getExperience()+xp);
     }
-    public void castAbility(Unit defender,int ap){
+    public void castAbility(Enemy defender,int ap){
         int [] combatInfo = defender.defence(ap);
         UI.print(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
         UI.print(getName() + " hit " + defender.getName() + " for " + combatInfo[1] + " ability damage.");
+        if(defender.isDead()) {
+            UI.print(defender.getName() + " died. " + this.getName() + " gained " + defender.experienceValue + " experience");
+            gainXp(defender.experienceValue);
+        }
     }
 
 

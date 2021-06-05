@@ -2,6 +2,7 @@ package game;
 
 
 import unit.Unit;
+import unit.enemy.Boss;
 import unit.enemy.Monster;
 import unit.enemy.Trap;
 import unit.player.Hunter;
@@ -93,6 +94,14 @@ public class DatabaseUnits {
          int range=Integer.parseInt(typeUnit.get(6));
          return new Hunter(name,tile,health,attack,defence,range);
       }
+
+      if(type.equals("Boss")){
+         int visionRange=Integer.parseInt(typeUnit.get(6));
+         int expirenceValue=Integer.parseInt(typeUnit.get(7));
+         int abilityFrequency = Integer.parseInt(typeUnit.get(8));
+         return new Boss(name,tile,health,attack,defence,expirenceValue,visionRange, abilityFrequency);
+      }
+
       return null;
    }
 }
