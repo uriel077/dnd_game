@@ -27,7 +27,7 @@ public class Player extends Unit implements HeroicUnit {
 
     }
     public Player(String name, char tile, Health health, int attack, int defence) {
-        super( name, tile, health.healthAmount, attack, defence);//TODO: check again the constructor
+        super( name, tile, health.healthAmount, attack, defence);
 
     }
 

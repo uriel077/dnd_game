@@ -72,7 +72,7 @@ public class Mage extends Player {
     }
     @Override
     public void tryCastAbility(){
-        boolean cast = this.tryCastAbility(currentMana , manaCost); //TODO: tried this.tryCast instead of super
+        boolean cast = this.tryCastAbility(currentMana , manaCost);
         if (!cast){
             UI.print(this.getName()+" tried to cast "+this.abilityName+", but there was not enough mana: "+currentMana+"/"+manaCost);
         }

@@ -33,7 +33,7 @@ public class Boss extends Enemy implements HeroicUnit {
 
     }
 
-    public void castAbility(Player target) { //TODO: finish this! you have 5 mins
+    public void castAbility(Player target) {
         UI.print(this.getName() + " cast special ability");
         int[] combatInfo = target.defence(this.getAttackPoints());
         UI.print(target.getName() + " rolled " + combatInfo[0] + " defence points.");
