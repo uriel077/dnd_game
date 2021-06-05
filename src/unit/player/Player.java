@@ -101,7 +101,6 @@ public class Player extends Unit implements HeroicUnit {
 
     public void move(UserInput moveDir) {
         MoveHandler.move(moveDir, this);
-
     }
 @Override
     public void turn(int turnCount){
