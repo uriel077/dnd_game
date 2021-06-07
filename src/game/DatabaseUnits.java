@@ -10,14 +10,17 @@ import unit.player.Mage;
 import unit.player.Rogue;
 import unit.player.Warrior;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.stream.Collectors;
 
 
 public class DatabaseUnits {
@@ -31,23 +34,21 @@ public class DatabaseUnits {
       buildDictionary();
    }
    public static void buildDictionary(){
-      buildUnit(dirAddons+"/dbPlayer",playerPool);
-      buildUnit(dirAddons+"/dbEnemy",enemyPool);
-
+      buildUnit("/addons/dbPlayer",playerPool);
+      buildUnit("/addons/dbEnemy",enemyPool);
    }
-   public static String getFile(String address)  {
+   public static String getFileJar(String address){
       String fileText="";
-      try {
-         Path fileName = Path.of(address);
-         fileText=Files.readString(fileName);
-      }
-      catch (IOException e){}
-
+      InputStream in = DatabaseUnits.class.getResourceAsStream(address);
+      BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+      fileText=reader.lines().collect(Collectors.joining("\n"));
       return fileText;
    }
+
    private static void buildUnit(String address,Map<String, Unit > map){
-   String txtToSplit=getFile(address);
-   ArrayList<String> enemyUnit=  new ArrayList<String>(Arrays.asList(txtToSplit.split("\r\n")));
+
+   String txtToSplit=getFileJar(address);
+   ArrayList<String> enemyUnit=  new ArrayList<String>(Arrays.asList(txtToSplit.split("\n")));
       for (String unitStr:enemyUnit) {
          ArrayList<String> argumentUnit= new ArrayList<String>(Arrays.asList(unitStr.split("\\|")));
          Unit unitObj=facrotyUnit(argumentUnit);
@@ -57,7 +58,9 @@ public class DatabaseUnits {
    }
 
    private static Unit facrotyUnit( ArrayList<String> typeUnit){
+
       String type=typeUnit.get(0);
+
       String name=typeUnit.get(1);
       char tile=typeUnit.get(2).charAt(0);
       int health=Integer.parseInt(typeUnit.get(3));
