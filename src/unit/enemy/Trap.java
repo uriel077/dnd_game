@@ -26,6 +26,7 @@ public class Trap extends Enemy {
     public Trap(String name, char tile, int hp, int ap, int dp, int xp, int visibilityTime, int invisibilityTime){
         this(name, tile, hp, ap, dp,xp,visibilityTime,invisibilityTime, new Coordinate());
     }
+
     public void turn(int turnCount){
         setVisible(tickCount<visibilityTime);
         if(tickCount==(visibilityTime+invisibilityTime))
