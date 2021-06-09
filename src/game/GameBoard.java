@@ -36,9 +36,10 @@ public class GameBoard {
                         player.setCoordinate(x, y);
                         player.setTile('@');
                     }
-                    if (ch == '#')
-                        Pos = new Coordinate(x,y);
+                    if (ch == '#') {
+                        Pos = new Coordinate(x, y);
                         walls.put(Pos, new Wall(Pos));
+                    }
                     if (DatabaseUnits.enemyPool.containsKey(ch+"")){
                         enemy = DatabaseUnits.enemyPool.get(ch+"").copy();
                         enemy.setCoordinate(x,y);

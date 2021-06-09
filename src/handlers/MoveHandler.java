@@ -61,7 +61,7 @@ public class MoveHandler {
         return newPos;
     }
     private static boolean isValidMove(Coordinate newPos){
-        return (newPos.x>= 0 && newPos.x<= gameBoard.width && newPos.y>= 0 && newPos.y<= gameBoard.height &&
+        return (newPos.x>= 0 && newPos.x< gameBoard.width && newPos.y>= 0 && newPos.y< gameBoard.height &&
                 !gameBoard.walls.containsKey(newPos));
     }
 
