@@ -4,11 +4,17 @@ import game.GameManager;
 
 public class main {
     public static void main(String[] args) {
-       // String address="D:\\study\\data_structre\\dnd ex\\levels_dir";// "C:\\Users\\kirbi\\Downloads\\D&D Test\\levels";
-        //"D:\\study\\data_structre\\dnd ex\\levels_dir";
         GameManager gameManager=new GameManager();
-        gameManager.start(args[0]);
+        gameManager.start(combiner(args));
 
+    }
+
+    private static String combiner(String[] args)
+    {
+        String combineString ="";
+        for(String str: args)
+            combineString+=str+" ";
+        return combineString.trim();
     }
 }
 

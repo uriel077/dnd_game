@@ -5,14 +5,13 @@ import handlers.TargetHandler;
 import unit.Unit;
 import unit.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Trap extends Enemy {
-    public int visibilityTime=0;
-    public int invisibilityTime=0;
+    private int visibilityTime=0;
+    private int invisibilityTime=0;
     private boolean visible=true;
-    public int tickCount=0;
+    private int tickCount=0;
     private final int VISION_RANGE=2;
     private  char VISIBLE_TILE;
     private  char INVISIBLE_TILE='.';
@@ -40,7 +39,7 @@ public class Trap extends Enemy {
     @Override
     public Unit copy() {
         return new Trap(this.getName(), this.toString().charAt(0), this.getCurrentHealth(), this.getAttackPoints(), this.getDefencePoints()
-                ,this.experienceValue,this.visibilityTime,invisibilityTime);
+                ,this.getExperienceValue() ,this.visibilityTime,invisibilityTime);
     }
 
     public boolean isVisible() {

@@ -3,17 +3,12 @@ package unit.enemy;
 import enums.UserInput;
 import game.Coordinate;
 import game.UI;
-import handlers.InputHandler;
 import handlers.MoveHandler;
 import unit.Unit;
 import unit.player.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Enemy extends Unit {
-    public int experienceValue=0;
-    public List<String> messageContainer=new ArrayList<>();
+    private int experienceValue=0;
     public Enemy(){}
     public Enemy(String name, char tile, int hp, int ap, int dp, Coordinate pos) {
         super(name, tile, hp, ap, dp,pos);
@@ -61,5 +56,8 @@ public class Enemy extends Unit {
             UI.print(defender.getName()+" was killed by "+this.getName()+".");
         }
 
+    }
+    public int getExperienceValue(){
+        return experienceValue;
     }
 }

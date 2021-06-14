@@ -6,18 +6,16 @@ import game.GameManager;
 import game.Health;
 import game.UI;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 public abstract class Unit {
 
-    private String name;
-    private Health health = new Health(0,0);
-    private int attackPoints;
-    private int defencePoints;
-    private Coordinate coordinate = new Coordinate();
-    private char tile;
-    private Random rnd = new Random();
+    protected String name;
+    protected Health health = new Health(0,0);
+    protected int attackPoints;
+    protected int defencePoints;
+    protected Coordinate coordinate = new Coordinate();
+    protected char tile;
+    protected Random rnd = new Random();
     public static GameManager gameManager;
 
     public Unit(){}
