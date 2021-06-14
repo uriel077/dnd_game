@@ -15,11 +15,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class GameManager {
-    List<String> messages=new ArrayList<String>();
-    public GameBoard gameBoard= new GameBoard();
-    public List<Unit> listTurn=new ArrayList<Unit>();
+    private GameBoard gameBoard= new GameBoard();
+    private List<Unit> listTurn=new ArrayList<Unit>();
     private int tickCount=0;
     private  List<File> levelsFiles=new ArrayList<File>();
+
     public GameManager(){
         DatabaseUnits.buildDictionary();
         UI.gameBoard=this.gameBoard;
@@ -77,17 +77,15 @@ public class GameManager {
     }
 
     private void startLevel() {
-        List<String> message=new ArrayList<String>();
-        List<String> msg=new ArrayList<String>();
+
         tickCount=0;
         while(!gameBoard.player.isDead()&&gameBoard.enemies.size()!=0)
         {
             UI.printLevel();
-            message.clear();
             tickCount+=1;
           onTick();
         }if(gameBoard.player.isDead())
-            message.add("You Lost");
+            UI.print("You Lost");
         UI.printLevel();
     }
 

@@ -45,7 +45,7 @@ public class Monster extends Enemy {
     @Override
     public Unit copy() {
         return new Monster(this.getName(), this.toString().charAt(0), this.getCurrentHealth(), this.getAttackPoints(), this.getDefencePoints()
-                ,this.experienceValue,this.visionRange);
+                ,this.getExperienceValue() ,this.visionRange);
     }
     @Override
     public String description() {

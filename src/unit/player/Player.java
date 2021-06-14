@@ -9,16 +9,12 @@ import handlers.MoveHandler;
 import unit.Unit;
 import unit.enemy.Enemy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Player extends Unit implements HeroicUnit {
 
-    public int experience=0;
-    public int playerLevel =1;
-    public String abilityName="";
-    public int abilityRange=0;
+    protected int experience=0;
+    protected int playerLevel =1;
+    protected String abilityName="";
+    protected int abilityRange=0;
     private int LEVEL_SIZE=50;
 
     public Player(){}
@@ -67,8 +63,8 @@ public class Player extends Unit implements HeroicUnit {
         UI.print(defender.getName() + " rolled " + combatInfo[0] + " defence points.");
         UI.print(getName() + " hit " + defender.getName() + " for " + combatInfo[1] + " ability damage.");
         if(defender.isDead()) {
-            UI.print(defender.getName() + " died. " + this.getName() + " gained " + defender.experienceValue + " experience");
-            gainXp(defender.experienceValue);
+            UI.print(defender.getName() + " died. " + this.getName() + " gained " + defender.getExperienceValue() + " experience");
+            gainXp(defender.getExperienceValue() );
         }
     }
 
@@ -76,8 +72,8 @@ public class Player extends Unit implements HeroicUnit {
     public void attack(Enemy defender ){
        super.attack(defender);
         if(defender.isDead()){
-            UI.print(defender.getName()+" died. "+this.getName()+" gained "+defender.experienceValue+" experience");
-            gainXp(defender.experienceValue);
+            UI.print(defender.getName()+" died. "+this.getName()+" gained "+defender.getExperienceValue() +" experience");
+            gainXp(defender.getExperienceValue() );
         }
 
     }
@@ -98,7 +94,6 @@ public class Player extends Unit implements HeroicUnit {
         }
 
     @Override
-
     public void move(UserInput moveDir) {
         MoveHandler.move(moveDir, this);
     }
@@ -126,4 +121,5 @@ public class Player extends Unit implements HeroicUnit {
             gameManager.removeTurn(this);
         }
     }
+
 }

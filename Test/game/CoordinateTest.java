@@ -1,14 +1,9 @@
 package game;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import unit.Unit;
-import unit.enemy.Enemy;
-import unit.player.Player;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CoordinateTest {
 
@@ -24,7 +19,6 @@ class CoordinateTest {
         cord4=new Coordinate(4,6);
 
     }
-
 
     @Test
     void distance() {

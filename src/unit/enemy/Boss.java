@@ -26,7 +26,7 @@ public class Boss extends Enemy implements HeroicUnit {
     @Override
     public Unit copy(){
        return new Boss(this.getName(), this.toString().charAt(0), this.getCurrentHealth(), this.getAttackPoints(), this.getDefencePoints()
-               ,this.experienceValue,this.visionRange, this.abilityFrequency);
+               ,this.getExperienceValue() ,this.visionRange, this.abilityFrequency);
     }
 
     public void castAbility(){
