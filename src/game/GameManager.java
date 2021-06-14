@@ -27,8 +27,41 @@ public class GameManager {
         MoveHandler.gameBoard=this.gameBoard;
         Unit.gameManager=this;
     }
-
+    public void instruction(){
+        UI.print("*!*!*!*!*!*!*!*!*! D&D-Roguelike !*!*!*!*!*!*!*!*!*");
+        UI.print("*** Game instructions:\n");
+        UI.print("* Game Controls:\n");
+        UI.print(
+                "-Move up:\tW\n" +
+                "-Move down:\tS\n" +
+                "-Move right:\tD\n" +
+                "-Move left:\tA\n" +
+                "-Wait:\tQ\n" +
+                "-Attack: Steping on an enemy\n" +
+                "-Cast special Attack:\tE\n");
+        UI.print("* Map description:\n");
+        UI.print("-(.):\t Free space\n" +
+                "-(#):\t Wall\n" +
+                "-(@):\t Your player\n");
+        UI.print("* Enemies list:\n");
+        UI.print("-(s):\t Lannister Solider\n" +
+                "-(k):\t Lannister Knight\n" +
+                "-(q):\t Queen’s Guard\n" +
+                "-(z):\t Wright\n" +
+                "-(b):\t Bear-Wright\n" +
+                "-(g):\t Giant-Wright\n" +
+                "-(w):\t White Walker\n" +
+                "^ Traps:\n" +
+                "-(B):\t Bonus Trap\n" +
+                "-(Q):\t Queen’s Trap\n" +
+                "-(D):\t Death Trap\n" +
+                "! Bosses:\n" +
+                "-(M):\t The Mountain\n" +
+                "-(C):\t Queen Cersei\n" +
+                "-(N):\t Night’s King\n");
+    }
     public void start(String address){
+        instruction();
         getPlayerMenu();
         createListOfLevel(address);
         for (File level:levelsFiles) {
